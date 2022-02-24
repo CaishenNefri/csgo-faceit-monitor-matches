@@ -1,6 +1,7 @@
 # TODO
   - Done: Create infrastructure with terraform: https://docs.microsoft.com/en-us/azure/app-service/provision-resource-terraform
-  - 
+  - Create simple HelloWorld Pyton app: https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=flask%2Cwindows%2Cazure-portal%2Cterminal-bash%2Clocal-git-deploy%2Cdeploy-instructions-azportal%2Cdeploy-instructions-zip-azcli
+  - Deploy on Azure HelloWorld Python app by terraform
   - Python webpage with list of mejz matches
 
 # Links
