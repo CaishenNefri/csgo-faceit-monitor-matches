@@ -29,4 +29,4 @@ steps:
     resourceGroupName: rg-csgo-faceit-monitor-matches
     appType: webAppLinux
     appName: $(WebAppName)
-    package: '$(Build.SourcesDirectory)\.appSerivcePython\*'
+    package: '$(Build.SourcesDirectory)/.appSerivcePython'
