@@ -1,0 +1,16 @@
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  azureSubscriptionEndpoint: Azure for Students
+  WebAppName: app-service-73638
+
+steps:
+
+- task: "AzureRMWebAppDeployment@4"
+  displayName: Azure App Service Deploy
+  inputs:
+    WebAppKind: webAppLinux
+    ConnectedServiceName: $(azureSubscriptionEndpoint)
+    WebAppName: $(WebAppName)
+    Package: $(System.DefaultWorkingDirectory/.appSerivcePython/
