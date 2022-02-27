@@ -28,4 +28,4 @@ steps:
     azureSubscription: $(azureSubscriptionEndpoint)
     appType: webAppLinux
     appName: $(WebAppName)
-    package: '$(Build.SourcesDirectory)/*'
+    package: '$(Build.SourcesDirectory)/.appSerivcePython/*'
