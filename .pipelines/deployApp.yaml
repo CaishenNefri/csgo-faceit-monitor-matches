@@ -7,13 +7,13 @@ variables:
 
 steps:
 
-# - task: "AzureRMWebAppDeployment@4"
-#   displayName: Azure App Service Deploy
-#   inputs:
-#     WebAppKind: webAppLinux
-#     ConnectedServiceName: $(azureSubscriptionEndpoint)
-#     WebAppName: $(WebAppName)
-#     Package: $(Build.SourcesDirectory)/.appSerivcePython/
+- task: "AzureRMWebAppDeployment@4"
+  displayName: Azure App Service Deploy
+  inputs:
+    WebAppKind: webAppLinux
+    ConnectedServiceName: $(azureSubscriptionEndpoint)
+    WebAppName: $(WebAppName)
+    Package: $(Build.SourcesDirectory)\.appSerivcePython\
 
 - task: Bash@3
   inputs:
