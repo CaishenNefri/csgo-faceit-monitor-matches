@@ -7,10 +7,15 @@ variables:
 
 steps:
 
-- task: "AzureRMWebAppDeployment@4"
-  displayName: Azure App Service Deploy
+# - task: "AzureRMWebAppDeployment@4"
+#   displayName: Azure App Service Deploy
+#   inputs:
+#     WebAppKind: webAppLinux
+#     ConnectedServiceName: $(azureSubscriptionEndpoint)
+#     WebAppName: $(WebAppName)
+#     Package: $(System.DefaultWorkingDirectory)/.appSerivcePython/
+
+- task: Bash@3
   inputs:
-    WebAppKind: webAppLinux
-    ConnectedServiceName: $(azureSubscriptionEndpoint)
-    WebAppName: $(WebAppName)
-    Package: $(System.DefaultWorkingDirectory)/.appSerivcePython/
+      targetType: 'inline'
+      script: 'ls ''$(Build.SourcesDirectory)'''
