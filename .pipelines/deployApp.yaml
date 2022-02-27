@@ -30,3 +30,5 @@ steps:
     appType: webAppLinux
     appName: $(WebAppName)
     package: '$(Build.SourcesDirectory)/.appSerivcePython'
+
+- task: PublishBuildArtifacts@1
