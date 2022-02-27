@@ -25,7 +25,8 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: $(azureSubscriptionEndpoint)
+    ConnectedServiceName: $(azureSubscriptionEndpoint)
+    resourceGroupName: rg-csgo-faceit-monitor-matches
     appType: webAppLinux
     appName: $(WebAppName)
     package: '$(Build.SourcesDirectory)/.appSerivcePython/*'
