@@ -28,9 +28,9 @@ steps:
 
 - task: AzureRMWebAppDeployment@4
   inputs:
-    azureSubscription: $(azureSubscriptionEndpoint)
-    appType: webAppLinux
-    appName: $(WebAppName)
-    package: '$(Build.SourcesDirectory)/.appSerivcePython'
+    ConnectedServiceName: $(azureSubscriptionEndpoint)
+    WebAppKind: webAppLinux
+    WebAppName: $(WebAppName)
+    Package: '$(Build.SourcesDirectory)/.appSerivcePython'
 
 - task: PublishBuildArtifacts@1
