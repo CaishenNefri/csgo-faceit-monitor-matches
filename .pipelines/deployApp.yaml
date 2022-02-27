@@ -1,5 +1,10 @@
 trigger:
-- dev
+  branches:
+    include:
+    - dev
+  paths:
+    include:
+      - .appServicePython
 
 pool:
   vmImage: ubuntu-latest
