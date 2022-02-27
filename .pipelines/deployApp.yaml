@@ -14,10 +14,10 @@ steps:
 #     WebAppName: $(WebAppName)
 #     Package: $(Build.SourcesDirectory)\.appSerivcePython\
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'ls ''$(Build.SourceVersion)'''
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: 'ls ''$(Build.SourcesDirectory)'''
 # - task: PowerShell@2
 #   inputs:
 #     targetType: 'inline'
@@ -29,4 +29,4 @@ steps:
     resourceGroupName: rg-csgo-faceit-monitor-matches
     appType: webAppLinux
     appName: $(WebAppName)
-    package: '$(Build.SourceVersion)/.appSerivcePython/*'
+    package: '$(Build.SourcesDirectory)/.appSerivcePython/*'
