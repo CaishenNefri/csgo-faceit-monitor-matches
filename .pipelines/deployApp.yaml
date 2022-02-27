@@ -13,4 +13,4 @@ steps:
     WebAppKind: webAppLinux
     ConnectedServiceName: $(azureSubscriptionEndpoint)
     WebAppName: $(WebAppName)
-    Package: $(System.DefaultWorkingDirectory/.appSerivcePython/
+    Package: $(System.DefaultWorkingDirectory/.appSerivcePython
