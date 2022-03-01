@@ -51,10 +51,16 @@ steps:
   displayName: 'Upload package'
   artifact: drop
 
-
-- task: AzureRMWebAppDeployment@4
+- task: AzureWebApp@1
+  displayName: "Deploy Azure Web App : {{ webAppName }}"
   inputs:
-    ConnectedServiceName: $(azureSubscriptionEndpoint)
-    WebAppKind: webAppLinux
-    WebAppName: $(WebAppName)
-    Package: '$(Build.SourcesDirectory)/appServicePython'
+    azureSubscription: $(azureSubscriptionEndpoint)
+    appName: $(webAppName)
+    package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+
+# - task: AzureRMWebAppDeployment@4
+#   inputs:
+#     ConnectedServiceName: $(azureSubscriptionEndpoint)
+#     WebAppKind: webAppLinux
+#     WebAppName: $(WebAppName)
+#     Package: '$(Build.SourcesDirectory)/appServicePython'
