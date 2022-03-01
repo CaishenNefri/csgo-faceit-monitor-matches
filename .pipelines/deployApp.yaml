@@ -15,14 +15,14 @@ steps:
 #     WebAppName: $(WebAppName)
 #     Package: $(Build.SourcesDirectory)\.appSerivcePython\
 
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: 'ls ''$(Build.SourcesDirectory)'''
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: 'Get-Content -Path $(Build.SourcesDirectory)\notes.md'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'ls ''$(Build.SourcesDirectory)'''
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'Get-Content -Path $(Build.SourcesDirectory)\notes.md'
 
 - task: UsePythonVersion@0
   inputs:
@@ -34,7 +34,7 @@ steps:
     python -m pip install --upgrade pip
     pip install setup
     pip install -r requirements.txt
-  workingDirectory: '.appSerivcePython'
+  workingDirectory: '$(Build.SourcesDirectory)/.appSerivcePython'
   displayName: "Install requirements"
 
 - task: ArchiveFiles@2
