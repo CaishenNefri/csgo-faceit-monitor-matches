@@ -30,6 +30,7 @@ steps:
     displayName: 'Use Python $(pythonVersion)'
 - script: |
     ls
+    pwd
     python -m venv antenv
     source antenv/bin/activate
     python -m pip install --upgrade pip
