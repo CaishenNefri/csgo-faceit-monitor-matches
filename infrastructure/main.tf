@@ -45,6 +45,8 @@ resource "azurerm_app_service" "appservice" {
   site_config {
     app_command_line = "gunicorn --bind=0.0.0.0 --timeout 600 hello:myapp"
     use_32_bit_worker_process = true
+    linux_fx_version = "PYTHON|3.9"
+    # python_version = 3.4 # Can not use higher version because of terraform provider ....
   }
 #   source_control {
 #     repo_url           = "https://github.com/Azure-Samples/nodejs-docs-hello-world"
