@@ -3,7 +3,7 @@ pool:
 
 variables:
   azureSubscriptionEndpoint: AzureRM
-  WebAppName: app-service-73638
+  WebAppName: app-service-47651
   pythonVersion: "3.9"
 
 steps:
