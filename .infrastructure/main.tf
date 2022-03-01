@@ -28,6 +28,8 @@ resource "azurerm_app_service_plan" "appserviceplan" {
   name                = "app-service-plan-${random_integer.ri.result}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  kind = "Linux"
+  reserved = true
   sku {
     tier = "Free"
     size = "F1"
@@ -39,6 +41,11 @@ resource "azurerm_app_service" "appservice" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.appserviceplan.id
+  
+  site_config {
+    app_command_line = "gunicorn --bind=0.0.0.0 --timeout 600 hello:myapp"
+    use_32_bit_worker_process = true
+  }
 #   source_control {
 #     repo_url           = "https://github.com/Azure-Samples/nodejs-docs-hello-world"
 #     branch             = "master"

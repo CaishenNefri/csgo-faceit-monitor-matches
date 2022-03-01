@@ -1,6 +1,13 @@
 # TODO
   - Done: Create infrastructure with terraform: https://docs.microsoft.com/en-us/azure/app-service/provision-resource-terraform
-  - 
+  - Done: Getting started with Python in Azure: https://docs.microsoft.com/en-us/azure/developer/python/cloud-development-overview
+  - Done: Create simple HelloWorld Pyton app: 
+    - https://docs.microsoft.com/en-us/azure/developer/python/tutorial-deploy-app-service-on-linux-01
+    - https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=flask%2Cwindows%2Cazure-portal%2Cterminal-bash%2Clocal-git-deploy%2Cdeploy-instructions-azportal%2Cdeploy-instructions-zip-azcli
+  - Done: Learn how to edite Python Code in Visual Studio https://code.visualstudio.com/docs/python/editing
+  - Nope: Deploy on Azure HelloWorld Python app by terraform
+  - Read about Key concepts: https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops
+  - Deploy CI/CD: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops
   - Python webpage with list of mejz matches
 
 # Links

@@ -1,0 +1,58 @@
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  azureSubscriptionEndpoint: AzureRM
+  WebAppName: app-service-73638
+  pythonVersion: "3.9.10"
+
+steps:
+# - task: "AzureRMWebAppDeployment@4"
+#   displayName: Azure App Service Deploy
+#   inputs:
+#     WebAppKind: webAppLinux
+#     ConnectedServiceName: $(azureSubscriptionEndpoint)
+#     WebAppName: $(WebAppName)
+#     Package: $(Build.SourcesDirectory)\.appSerivcePython\
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: 'ls ''$(Build.SourcesDirectory)'''
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: 'Get-Content -Path $(Build.SourcesDirectory)\notes.md'
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(pythonVersion)'
+    displayName: 'Use Python $(pythonVersion)'
+- script: |
+    python -m venv antenv
+    source antenv/bin/activate
+    python -m pip install --upgrade pip
+    pip install setup
+    pip install -r requirements.txt
+  workingDirectory: '.appSerivcePython'
+  displayName: "Install requirements"
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/.appSerivcePython'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+    replaceExistingArchive: true
+    verbose: # (no value); this input is optional
+- publish: $(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip
+  displayName: 'Upload package'
+  artifact: drop
+
+
+- task: AzureRMWebAppDeployment@4
+  inputs:
+    ConnectedServiceName: $(azureSubscriptionEndpoint)
+    WebAppKind: webAppLinux
+    WebAppName: $(WebAppName)
+    Package: '$(Build.SourcesDirectory)/.appSerivcePython'
