@@ -1,4 +1,4 @@
-.pool:
+pool:
   vmImage: ubuntu-latest
 
 variables:
@@ -56,4 +56,4 @@ steps:
     ConnectedServiceName: $(azureSubscriptionEndpoint)
     WebAppKind: webAppLinux
     WebAppName: $(WebAppName)
-    Package: '$(Build.SourcesDirectory)/.appSerivcePython'.
+    Package: '$(Build.SourcesDirectory)/.appSerivcePython'
