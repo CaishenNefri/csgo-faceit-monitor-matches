@@ -31,6 +31,7 @@ steps:
 - script: |
     ls
     pwd
+    echo ${projectRoot}
     python -m venv antenv
     source antenv/bin/activate
     python -m pip install --upgrade pip
@@ -52,7 +53,7 @@ steps:
   artifact: drop
 
 - task: AzureWebApp@1
-  displayName: "Deploy Azure Web App : {{ webAppName }}"
+  displayName: "Deploy Azure Web App : $(webAppName)"
   inputs:
     azureSubscription: $(azureSubscriptionEndpoint)
     appName: $(webAppName)
