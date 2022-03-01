@@ -29,22 +29,6 @@ steps:
   workingDirectory: 'appServicePython'
   displayName: "Install requirements"
 
-# - task: ArchiveFiles@2
-#   inputs:
-#     rootFolderOrFile: '$(Build.SourcesDirectory)/appServicePython'
-#     includeRootFolder: false
-#     archiveType: 'zip'
-#     archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
-#     replaceExistingArchive: true
-#     verbose: # (no value); this input is optional
-# - publish: $(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip
-#   displayName: 'Upload package'
-#   artifact: drop
-
-# - task: UsePythonVersion@0
-#   inputs:
-#     versionSpec: '$(pythonVersion)'
-#   displayName: 'Use Python version'
 - task: AzureWebApp@1
   displayName: 'Deploy Azure Web App : {{ webAppName }}'
   inputs:
