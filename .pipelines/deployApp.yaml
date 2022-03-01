@@ -21,9 +21,6 @@ steps:
     versionSpec: '$(pythonVersion)'
     displayName: 'Use Python $(pythonVersion)'
 - script: |
-    ls
-    pwd
-    echo ${projectRoot}
     python -m venv antenv
     source antenv/bin/activate
     python -m pip install --upgrade pip
@@ -32,28 +29,28 @@ steps:
   workingDirectory: 'appServicePython'
   displayName: "Install requirements"
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/appServicePython'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
-    replaceExistingArchive: true
-    verbose: # (no value); this input is optional
-- publish: $(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip
-  displayName: 'Upload package'
-  artifact: drop
+# - task: ArchiveFiles@2
+#   inputs:
+#     rootFolderOrFile: '$(Build.SourcesDirectory)/appServicePython'
+#     includeRootFolder: false
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+#     replaceExistingArchive: true
+#     verbose: # (no value); this input is optional
+# - publish: $(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip
+#   displayName: 'Upload package'
+#   artifact: drop
 
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(pythonVersion)'
-  displayName: 'Use Python version'
+# - task: UsePythonVersion@0
+#   inputs:
+#     versionSpec: '$(pythonVersion)'
+#   displayName: 'Use Python version'
 - task: AzureWebApp@1
   displayName: 'Deploy Azure Web App : {{ webAppName }}'
   inputs:
     azureSubscription: $(azureSubscriptionEndpoint)
     appName: $(webAppName)
-    package: $(Pipeline.Workspace)/drop/Application$(Build.BuildId).zip
+    package: $(Build.SourcesDirectory)/appServicePython/
     # The following parameter is specific to the Flask example code. You may
     # or may not need a startup command for your app.
-    startUpCommand: 'gunicorn --bind=0.0.0.0 --workers=4 startup:app'
+    startUpCommand: 'gunicorn --bind=0.0.0.0 --timeout 600 hello:myapp'
