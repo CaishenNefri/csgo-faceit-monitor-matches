@@ -53,7 +53,7 @@ steps:
   inputs:
     azureSubscription: $(azureSubscriptionEndpoint)
     appName: $(webAppName)
-    package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+    package: $(Pipeline.Workspace)/drop/Application$(Build.BuildId).zip
     # The following parameter is specific to the Flask example code. You may
     # or may not need a startup command for your app.
     startUpCommand: 'gunicorn --bind=0.0.0.0 --workers=4 startup:app'
