@@ -4,7 +4,7 @@
 variables:
   azureSubscriptionEndpoint: AzureRM
   WebAppName: app-service-73638
-  pythonVersion: 3.9.10
+  pythonVersion: "3.9.10"
 
 steps:
 # - task: "AzureRMWebAppDeployment@4"
