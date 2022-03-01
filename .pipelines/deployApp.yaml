@@ -13,7 +13,7 @@ steps:
 #     WebAppKind: webAppLinux
 #     ConnectedServiceName: $(azureSubscriptionEndpoint)
 #     WebAppName: $(WebAppName)
-#     Package: $(Build.SourcesDirectory)\.appSerivcePython\
+#     Package: $(Build.SourcesDirectory)\.appServicePython\
 
 - task: Bash@3
   inputs:
@@ -35,12 +35,12 @@ steps:
     python -m pip install --upgrade pip
     pip install setup
     pip install -r requirements.txt
-  workingDirectory: 'appSerivcePython'
+  workingDirectory: 'appServicePython'
   displayName: "Install requirements"
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/appSerivcePython'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/appServicePython'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
@@ -56,4 +56,4 @@ steps:
     ConnectedServiceName: $(azureSubscriptionEndpoint)
     WebAppKind: webAppLinux
     WebAppName: $(WebAppName)
-    Package: '$(Build.SourcesDirectory)/appSerivcePython'
+    Package: '$(Build.SourcesDirectory)/appServicePython'
