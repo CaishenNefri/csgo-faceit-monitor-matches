@@ -34,12 +34,12 @@ steps:
     python -m pip install --upgrade pip
     pip install setup
     pip install -r requirements.txt
-  workingDirectory: '$(Build.SourcesDirectory)/.appSerivcePython'
+  workingDirectory: '$(Build.SourcesDirectory)/appSerivcePython'
   displayName: "Install requirements"
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/.appSerivcePython'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/appSerivcePython'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
@@ -55,4 +55,4 @@ steps:
     ConnectedServiceName: $(azureSubscriptionEndpoint)
     WebAppKind: webAppLinux
     WebAppName: $(WebAppName)
-    Package: '$(Build.SourcesDirectory)/.appSerivcePython'
+    Package: '$(Build.SourcesDirectory)/appSerivcePython'
