@@ -6,8 +6,11 @@
     - https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=flask%2Cwindows%2Cazure-portal%2Cterminal-bash%2Clocal-git-deploy%2Cdeploy-instructions-azportal%2Cdeploy-instructions-zip-azcli
   - Done: Learn how to edite Python Code in Visual Studio https://code.visualstudio.com/docs/python/editing
   - Nope: Deploy on Azure HelloWorld Python app by terraform
-  - Read about Key concepts: https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops
-  - Deploy CI/CD: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops
+  - Done: Read about Key concepts: https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops
+  - Done: Deploy CI/CD:
+    - https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops
+    - https://docs.microsoft.com/en-us/azure/devops/pipelines/targets/webapp?view=azure-devops&tabs=linux%2Cyaml
+  - Check if Pipeline will work with new terraform infra
   - Python webpage with list of mejz matches
 
 # Links
