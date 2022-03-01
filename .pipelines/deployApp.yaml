@@ -50,6 +50,7 @@ steps:
   inputs:
     azureSubscription: $(azureSubscriptionEndpoint)
     appName: $(webAppName)
+    # appType: "webAppLinux"
     package: $(Build.SourcesDirectory)/appServicePython/
     # The following parameter is specific to the Flask example code. You may
     # or may not need a startup command for your app.
