@@ -10,7 +10,9 @@
   - Done: Deploy CI/CD:
     - https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops
     - https://docs.microsoft.com/en-us/azure/devops/pipelines/targets/webapp?view=azure-devops&tabs=linux%2Cyaml
-  - Check if Pipeline will work with new terraform infra
+  - Done: Check if Pipeline will work with new terraform infra
+    - create ServicePrincipal with owner permissions
+    - update main.tf
   - Python webpage with list of mejz matches
 
 # Links

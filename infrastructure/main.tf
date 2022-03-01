@@ -59,5 +59,5 @@ resource "azurerm_app_service" "appservice" {
 resource "azurerm_role_assignment" "role" {
   scope                = azurerm_resource_group.rg.id
   role_definition_name = "Contributor"
-  principal_id         = "34866203-ac98-4047-8944-d80c2f7387d9"
+  principal_id         = "7ddeb03a-5f7c-4f1b-b39e-60b676864c0c" #ObjectID
 }
