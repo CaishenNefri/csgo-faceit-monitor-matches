@@ -1,11 +1,3 @@
-trigger:
-  branches:
-    include:
-    - dev
-  paths:
-    include:
-    - .appServicePython
-
 pool:
   vmImage: ubuntu-latest
 
@@ -31,11 +23,36 @@ steps:
 #     targetType: 'inline'
 #     script: 'Get-Content -Path $(Build.SourcesDirectory)\notes.md'
 
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(pythonVersion)'
+    displayName: 'Use Python $(pythonVersion)'
+- script: |
+    cd .appSerivcePython
+    python -m venv antenv
+    source antenv/bin/activate
+    python -m pip install --upgrade pip
+    pip install setup
+    pip install -r requirements.txt
+  workingDirectory: $(projectRoot)/.appSerivcePython
+  displayName: "Install requirements"
+
+- task: ArchiveFiles@2
+   inputs:
+     rootFolderOrFile: '$(Build.SourcesDirectory)/.appSerivcePython'
+     includeRootFolder: false
+     archiveType: 'zip'
+     archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+     replaceExistingArchive: true
+     verbose: # (no value); this input is optional
+- publish: $(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip
+   displayName: 'Upload package'
+   artifact: drop
+
+
 - task: AzureRMWebAppDeployment@4
   inputs:
     ConnectedServiceName: $(azureSubscriptionEndpoint)
     WebAppKind: webAppLinux
     WebAppName: $(WebAppName)
     Package: '$(Build.SourcesDirectory)/.appSerivcePython'
-
-- task: PublishBuildArtifacts@1
