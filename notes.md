@@ -13,6 +13,7 @@
   - Done: Check if Pipeline will work with new terraform infra
     - create ServicePrincipal with owner permissions
     - update main.tf
+  - Use in pipeline dynamic app-service name
   - Python webpage with list of mejz matches
 
 # Links
