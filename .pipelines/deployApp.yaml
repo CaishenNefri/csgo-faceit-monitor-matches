@@ -5,7 +5,7 @@ variables:
   azureSubscriptionEndpoint: AzureRM
   # webAppName: app-service-47651
   pythonVersion: "3.9"
-  - group: my-variable-group
+  - group: "Variable Group"
 
 steps:
 - task: Bash@3
