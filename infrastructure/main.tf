@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 2.97"
     }
+    azuredevops = {
+      source = "microsoft/azuredevops"
+      version = ">=0.2.0"
+    }
   }
 
   required_version = ">=1.1.0"
@@ -13,9 +17,25 @@ provider "azurerm" {
   features {}
 }
 
+data "azuredevops_project" "p" {
+  name = "csgo-faceit-monitor-matches"
+}
+
 resource "random_integer" "ri" {
   min = 10000
   max = 99999
+}
+
+resource "azuredevops_variable_group" "vg" {
+  project_id   = data.azuredevops_project.p.id
+  name         = "Variable Group"
+  description  = "Variable Group Description"
+  allow_access = true
+
+  variable {
+    name  = "webAppName"
+    value = azurerm_app_service.appservice.name
+  }
 }
 
 

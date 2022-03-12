@@ -13,6 +13,7 @@
   - Done: Check if Pipeline will work with new terraform infra
     - create ServicePrincipal with owner permissions
     - update main.tf
+  - Update terraform file: use new app service new as a variable in Azure DevOps pipeline
   - Use in pipeline dynamic app-service name
   - Python webpage with list of mejz matches
 
@@ -27,3 +28,7 @@
 - a0b4a0e5-f633-47f1-ae4b-a9b6cd0a8399 -->
 - Mejz id - player_id:
     - >4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb
+
+# Set env variable
+$env:AZDO_PERSONAL_ACCESS_TOKEN="***REMOVED***"
+$env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
