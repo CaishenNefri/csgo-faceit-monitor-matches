@@ -32,3 +32,8 @@
 # Set env variable
 $env:AZDO_PERSONAL_ACCESS_TOKEN="***REMOVED***"
 $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
+
+
+# Know problems
+Azure DevOps Pipeline do not see existing resource right after manually creation. Resolution: try implement terraform into pipeline | do not destry infra
+  - https://github.com/microsoft/azure-pipelines-tasks/issues/15532
