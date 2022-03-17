@@ -8,6 +8,13 @@ terraform {
       source  = "microsoft/azuredevops"
       version = ">=0.2.0"
     }
+
+    backend "azurerm" {
+      resource_group_name = "rg-constant"
+      storage_account_name = "constantstorage"
+      container_name       = "terraformstatecontainer"
+      key                  = "prod.terraform.tfstate"      
+    }
   }
 
   required_version = ">=1.1.0"
