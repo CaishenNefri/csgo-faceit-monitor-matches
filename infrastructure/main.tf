@@ -5,7 +5,7 @@ terraform {
       version = "~> 2.97"
     }
     azuredevops = {
-      source = "microsoft/azuredevops"
+      source  = "microsoft/azuredevops"
       version = ">=0.2.0"
     }
   }
@@ -18,7 +18,7 @@ provider "azurerm" {
 }
 
 provider "azuredevops" {
-  org_service_url = "https://dev.azure.com/Caishen"
+  org_service_url       = "https://dev.azure.com/Caishen"
   personal_access_token = "***REMOVED***"
 }
 
@@ -79,4 +79,9 @@ resource "azurerm_app_service" "appservice" {
   #     manual_integration = true
   #     use_mercurial      = false
   #   }
+}
+
+output "appservice" {
+  value          = azurerm_app_service.appservice.name
+  description = "Name of the appservice"
 }
