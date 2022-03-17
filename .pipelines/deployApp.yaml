@@ -10,6 +10,10 @@ variables:
     value: "3.9"
 
 steps:
+- task: TerraformCLI@0
+  displayName: 'terraform version'
+  inputs:
+    comand: version
 - task: Bash@3
   inputs:
     targetType: 'inline'
