@@ -25,7 +25,7 @@ steps:
   displayName: 'terraform: init'
   inputs:
     targetType: 'inline'
-    script: 'terraform -chdir=$(infraDir)" init'
+    script: 'terraform -chdir=$(infraDir) init'
 - task: Bash@3
   displayName: 'Show files in $(Build.SourcesDirectory)'
   inputs:
