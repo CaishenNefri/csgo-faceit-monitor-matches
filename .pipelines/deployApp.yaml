@@ -14,10 +14,7 @@ steps:
   displayName: 'terraform version'
   inputs:
     command: version
-- task: TerraformTaskV2@2
-  inputs:
-    provider: 'azurerm'
-    command: 'version'
+- bash: terraform version
 - task: Bash@3
   inputs:
     targetType: 'inline'
