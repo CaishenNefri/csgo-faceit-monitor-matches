@@ -8,7 +8,7 @@ variables:
   # - webAppName: app-service-47651
   - name: pythonVersion
     value: "3.9"
-  -name: infraDir
+  - name: infraDir
     value: "$(Build.SourcesDirectory)\infrastructure"
 
 steps:
