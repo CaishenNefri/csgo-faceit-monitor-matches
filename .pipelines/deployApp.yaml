@@ -8,6 +8,8 @@ variables:
   # - webAppName: app-service-47651
   - name: pythonVersion
     value: "3.9"
+  -name: infraDir
+    value: "$(Build.SourcesDirectory)\infrastructure"
 
 steps:
 - task: TerraformCLI@0
@@ -23,7 +25,7 @@ steps:
   displayName: 'terraform: init'
   inputs:
     targetType: 'inline'
-    script: 'terraform -chdir=".\infrastructure" init'
+    script: 'terraform -chdir=$(infraDir)" init'
 - task: Bash@3
   displayName: 'Show files in $(Build.SourcesDirectory)'
   inputs:
