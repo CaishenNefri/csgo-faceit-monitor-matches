@@ -81,7 +81,12 @@ resource "azurerm_app_service" "appservice" {
   #   }
 }
 
-output "appservice" {
+output "appserviceName" {
   value          = azurerm_app_service.appservice.name
   description = "Name of the appservice"
+}
+
+output "appserviceHostname" {
+  value          = azurerm_app_service.appservice.default_site_hostname
+  description = "Hostname of the appservice"
 }
