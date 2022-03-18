@@ -27,6 +27,16 @@ steps:
     targetType: 'inline'
     script: 'terraform -chdir=$(infraDir) init'
 - task: Bash@3
+  displayName: 'terraform: validate'
+  inputs:
+    targetType: 'inline'
+    script: 'terraform -chdir=$(infraDir) validate'
+- task: Bash@3
+  displayName: 'terraform: apply'
+  inputs:
+    targetType: 'inline'
+    script: 'terraform -chdir=$(infraDir) apply -auto-approve'
+- task: Bash@3
   displayName: 'Show files in $(Build.SourcesDirectory)'
   inputs:
     targetType: 'inline'
