@@ -8,13 +8,13 @@ terraform {
       source  = "microsoft/azuredevops"
       version = ">=0.2.0"
     }
+  }
 
-    backend "azurerm" {
-      resource_group_name = "rg-constant"
-      storage_account_name = "constantstorage"
-      container_name       = "terraformstatecontainer"
-      key                  = "prod.terraform.tfstate"      
-    }
+  backend "azurerm" {
+    resource_group_name  = "rg-constant"
+    storage_account_name = "constantstorage"
+    container_name       = "terraformstatecontainer"
+    key                  = "prod.terraform.tfstate"
   }
 
   required_version = ">=1.1.0"
@@ -89,11 +89,11 @@ resource "azurerm_app_service" "appservice" {
 }
 
 output "appserviceName" {
-  value          = azurerm_app_service.appservice.name
+  value       = azurerm_app_service.appservice.name
   description = "Name of the appservice"
 }
 
 output "appserviceHostname" {
-  value          = azurerm_app_service.appservice.default_site_hostname
+  value       = azurerm_app_service.appservice.default_site_hostname
   description = "Hostname of the appservice"
 }
