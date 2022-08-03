@@ -41,7 +41,13 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    commandOptions: '(infraDir)'
+    # workingDirectory: '$(infraDir)'
+    commandOptions: '-chdir=$(infraDir)'
+    backendServiceArm: 'Azure for Students(1564f82f-9f08-47e0-9939-5e3dcc739b5e)'
+    backendAzureRmResourceGroupName: 'rg-constant'
+    backendAzureRmStorageAccountName: 'constantstorage'
+    backendAzureRmContainerName: 'terraformstatecontainer'
+    backendAzureRmKey: 'prod.terraform.tfstate'
 # - task: Bash@3
 #   displayName: 'terraform: validate'
 #   inputs:
