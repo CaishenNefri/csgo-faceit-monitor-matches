@@ -27,31 +27,42 @@ steps:
 #     command: init
 #     workingDirectory: $(infraDir)
 
-- task: Bash@3
-  displayName: 'terraform: init'
+# - task: Bash@3
+#   displayName: 'terraform: init'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'terraform -chdir=$(infraDir) init'
+#   env:
+#     ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+#     ARM_CLIENT_ID:       $(kv-arm-client-id)
+#     ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+#     ARM_TENANT_ID:       $(kv-arm-tenant-id)
+- task: TerraformTaskV3@3
   inputs:
-    targetType: 'inline'
-    script: 'terraform -chdir=$(infraDir) init'
-  env:
-    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
-    ARM_CLIENT_ID:       $(kv-arm-client-id)
-    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
-    ARM_TENANT_ID:       $(kv-arm-tenant-id)
-- task: Bash@3
-  displayName: 'terraform: validate'
+    provider: 'azurerm'
+    command: 'init'
+    commandOptions: '(infraDir)'
+# - task: Bash@3
+#   displayName: 'terraform: validate'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'terraform -chdir=$(infraDir) validate'
+# - task: Bash@3
+#   displayName: 'terraform: apply'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'terraform -chdir=$(infraDir) apply -auto-approve'
+#   env:
+#     ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+#     ARM_CLIENT_ID:       $(kv-arm-client-id)
+#     ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+#     ARM_TENANT_ID:       $(kv-arm-tenant-id)
+- task: TerraformTaskV3@3
   inputs:
-    targetType: 'inline'
-    script: 'terraform -chdir=$(infraDir) validate'
-- task: Bash@3
-  displayName: 'terraform: apply'
-  inputs:
-    targetType: 'inline'
-    script: 'terraform -chdir=$(infraDir) apply -auto-approve'
-  env:
-    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
-    ARM_CLIENT_ID:       $(kv-arm-client-id)
-    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
-    ARM_TENANT_ID:       $(kv-arm-tenant-id)
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(Build.SourcesDirectory)/infrastructure'
+    environmentServiceNameAzureRM: 'Azure for Students(1564f82f-9f08-47e0-9939-5e3dcc739b5e)'
 - task: Bash@3
   displayName: 'Show files in $(Build.SourcesDirectory)'
   inputs:
