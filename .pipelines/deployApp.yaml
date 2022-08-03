@@ -21,11 +21,22 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'terraform version'
+# - task: TerraformCLI@0
+#   displayName: "terraform: init"
+#   inputs:
+#     command: init
+#     workingDirectory: $(infraDir)
+
 - task: Bash@3
   displayName: 'terraform: init'
   inputs:
     targetType: 'inline'
     script: 'terraform -chdir=$(infraDir) init'
+  env:
+    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+    ARM_CLIENT_ID:       $(kv-arm-client-id)
+    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+    ARM_TENANT_ID:       $(kv-arm-tenant-id)
 - task: Bash@3
   displayName: 'terraform: validate'
   inputs:
