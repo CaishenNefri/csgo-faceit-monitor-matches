@@ -12,63 +12,37 @@ variables:
     value: '"$(Build.SourcesDirectory)/infrastructure"'
 
 steps:
-- task: TerraformCLI@0
-  displayName: 'terraform version'
-  inputs:
-    command: version
+- bash: terraform version
 - task: Bash@3
   displayName: 'terraform: version'
   inputs:
     targetType: 'inline'
     script: 'terraform version'
-# - task: TerraformCLI@0
-#   displayName: "terraform: init"
-#   inputs:
-#     command: init
-#     workingDirectory: $(infraDir)
-
-# - task: Bash@3
-#   displayName: 'terraform: init'
-#   inputs:
-#     targetType: 'inline'
-#     script: 'terraform -chdir=$(infraDir) init'
-#   env:
-#     ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
-#     ARM_CLIENT_ID:       $(kv-arm-client-id)
-#     ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
-#     ARM_TENANT_ID:       $(kv-arm-tenant-id)
-- task: TerraformTaskV3@3
+- task: Bash@3
+  displayName: 'terraform: init'
   inputs:
-    provider: 'azurerm'
-    command: 'init'
-    # workingDirectory: '$(infraDir)'
-    commandOptions: '-chdir=$(infraDir)'
-    backendServiceArm: 'Azure for Students(1564f82f-9f08-47e0-9939-5e3dcc739b5e)'
-    backendAzureRmResourceGroupName: 'rg-constant'
-    backendAzureRmStorageAccountName: 'constantstorage'
-    backendAzureRmContainerName: 'terraformstatecontainer'
-    backendAzureRmKey: 'prod.terraform.tfstate'
-# - task: Bash@3
-#   displayName: 'terraform: validate'
-#   inputs:
-#     targetType: 'inline'
-#     script: 'terraform -chdir=$(infraDir) validate'
-# - task: Bash@3
-#   displayName: 'terraform: apply'
-#   inputs:
-#     targetType: 'inline'
-#     script: 'terraform -chdir=$(infraDir) apply -auto-approve'
-#   env:
-#     ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
-#     ARM_CLIENT_ID:       $(kv-arm-client-id)
-#     ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
-#     ARM_TENANT_ID:       $(kv-arm-tenant-id)
-- task: TerraformTaskV3@3
+    targetType: 'inline'
+    script: 'terraform -chdir=$(infraDir) init'
+  env:
+    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+    ARM_CLIENT_ID:       $(kv-arm-client-id)
+    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+    ARM_TENANT_ID:       $(kv-arm-tenant-id)
+- task: Bash@3
+  displayName: 'terraform: validate'
   inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    workingDirectory: '$(Build.SourcesDirectory)/infrastructure'
-    environmentServiceNameAzureRM: 'Azure for Students(1564f82f-9f08-47e0-9939-5e3dcc739b5e)'
+    targetType: 'inline'
+    script: 'terraform -chdir=$(infraDir) validate'
+- task: Bash@3
+  displayName: 'terraform: apply'
+  inputs:
+    targetType: 'inline'
+    script: 'terraform -chdir=$(infraDir) apply -auto-approve'
+  env:
+    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+    ARM_CLIENT_ID:       $(kv-arm-client-id)
+    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+    ARM_TENANT_ID:       $(kv-arm-tenant-id)
 - task: Bash@3
   displayName: 'Show files in $(Build.SourcesDirectory)'
   inputs:
