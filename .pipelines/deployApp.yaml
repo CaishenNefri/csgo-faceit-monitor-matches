@@ -47,6 +47,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'terraform -chdir=$(infraDir) apply -auto-approve'
+  env:
+    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+    ARM_CLIENT_ID:       $(kv-arm-client-id)
+    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+    ARM_TENANT_ID:       $(kv-arm-tenant-id)
 - task: Bash@3
   displayName: 'Show files in $(Build.SourcesDirectory)'
   inputs:
