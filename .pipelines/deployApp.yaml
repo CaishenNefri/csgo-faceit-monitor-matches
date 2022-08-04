@@ -67,6 +67,9 @@ steps:
   workingDirectory: 'appServicePython'
   displayName: "Install requirements"
 
+- bash: echo $(webAppName)
+  displayName: 'check webApp name'
+
 - task: AzureWebApp@1
   displayName: 'Deploy Azure Web App : {{ $(webAppName) }}'
   inputs:
