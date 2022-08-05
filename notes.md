@@ -13,8 +13,18 @@
   - Done: Check if Pipeline will work with new terraform infra
     - create ServicePrincipal with owner permissions
     - update main.tf
-  - Update terraform file: use new app service new as a variable in Azure DevOps pipeline
-  - Use in pipeline dynamic app-service name
+  - Done: Update terraform file: use new app service new as a variable in Azure DevOps pipeline
+  - Done: Use in pipeline dynamic app-service name
+  - Add keyvault to pipeline
+  - Run Terraform from yaml pipeline
+    - do plan
+    - do apply using generated plan
+    - authenticate: https://julie.io/writing/terraform-on-azure-pipelines-best-practices/#:~:text=difficult%20to%20understand.-,Why%20does%20az%20login%20not%20work%20in%20CI/CD%3F,-In%20short%2C%20it
+    - https://julie.io/writing/terraform-on-azure-pipelines-best-practices/ 
+  - Intergrate keyvault
+    - Azure DevOps personal access token
+    - service principal for terraform
+  - 
   - Python webpage with list of mejz matches
 
 # Links
