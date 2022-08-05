@@ -72,6 +72,11 @@ steps:
   displayName: 'check webApp name'
 
 - bash: echo "##vso[task.setvariable variable=myVar;]$(terraform -chdir=$(infraDir) output appserviceName)"
+  env:
+    ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+    ARM_CLIENT_ID:       $(kv-arm-client-id)
+    ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+    ARM_TENANT_ID:       $(kv-arm-tenant-id)
 
 - bash: echo $(myVar)
 
