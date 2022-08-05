@@ -46,7 +46,7 @@ resource "azuredevops_variable_group" "vg" {
 
   variable {
     name  = "webAppName"
-    value = azurerm_app_service.appservice.name
+    value = azurerm_linux_web_app.webapp.name
   }
 }
 
@@ -64,32 +64,27 @@ resource "azurerm_service_plan" "serviceplan" {
   sku_name            = "F1"
 }
 
-resource "azurerm_app_service" "appservice" {
-  name                = "app-service-${random_integer.ri.result}"
+resource "azurerm_linux_web_app" "webapp" {
+  name                = "webapp-${random_integer.ri.result}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  app_service_plan_id = azurerm_service_plan.serviceplan.id
+  service_plan_id     = azurerm_service_plan.serviceplan.id
 
   site_config {
-    app_command_line          = "gunicorn --bind=0.0.0.0 --timeout 600 hello:myapp"
-    use_32_bit_worker_process = true
-    linux_fx_version          = "PYTHON|3.9"
-    # python_version = 3.4 # Can not use higher version because of terraform provider ....
+    always_on        = false
+    app_command_line = "gunicorn --bind=0.0.0.0 --timeout 600 hello:myapp"
+    application_stack {
+      python_version = "3.9"
+    }
   }
-  #   source_control {
-  #     repo_url           = "https://github.com/Azure-Samples/nodejs-docs-hello-world"
-  #     branch             = "master"
-  #     manual_integration = true
-  #     use_mercurial      = false
-  #   }
 }
 
 output "appserviceName" {
-  value       = azurerm_app_service.appservice.name
+  value       = azurerm_linux_web_app.webapp.name
   description = "Name of the appservice"
 }
 
 output "appserviceHostname" {
-  value       = azurerm_app_service.appservice.default_site_hostname
+  value       = azurerm_linux_web_app.webapp.default_hostname
   description = "Hostname of the appservice"
 }
