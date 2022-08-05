@@ -43,7 +43,7 @@ stages:
     - job: "BuildInfra"
       displayName: 'Build Infra'
       dependsOn: CheckChangesInfra
-      condition: eq(dependencies.CheckChanges.outputs['check_changes.SOURCE_CODE_CHANGED'], 'true')
+      condition: eq(dependencies.CheckChangesInfra.outputs['check_changes.SOURCE_CODE_CHANGED'], 'true')
       steps:
       - bash: terraform version
         displayName: 'terraform: version'
