@@ -43,11 +43,11 @@ stages:
     - job: "BuildInfra"
       displayName: 'Build Infra'
       dependsOn: CheckChangesInfra
-      condition: eq(dependencies.CheckChanges.outputs['check_changes.SOURCE_CODE_CHANGED'], 'true')
+      condition: eq(dependencies.CheckChangesInfra.outputs['check_changes.SOURCE_CODE_CHANGED'], 'true')
       steps:
       - bash: terraform version
         displayName: 'terraform: version'
-      - bash: terraform -chdir=$(infraDir) init
+      - bash: terraform -chdir=$(infraDir) init -upgrade
         displayName: 'terraform: init'
         env:
           ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
@@ -57,6 +57,7 @@ stages:
       - bash: terraform -chdir=$(infraDir) validate
         displayName: 'terraform: validate'
       - bash: terraform -chdir=$(infraDir) apply -auto-approve
+        displayName: 'terraform: apply'
         env:
           ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
           ARM_CLIENT_ID:       $(kv-arm-client-id)
