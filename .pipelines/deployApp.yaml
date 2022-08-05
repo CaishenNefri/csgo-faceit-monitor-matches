@@ -5,7 +5,6 @@ variables:
   - group: "Variable Group"
   - name: azureSubscriptionEndpoint
     value: AzureRM
-  # - webAppName: app-service-47651
   - name: pythonVersion
     value: "3.9"
   - name: infraDir
@@ -16,47 +15,36 @@ jobs:
     steps:
     - bash: terraform version
       displayName: 'terraform: version'
-    - task: Bash@3
-      displayName: 'terraform: version'
-      inputs:
-        targetType: 'inline'
-        script: 'terraform version'
-    - task: Bash@3
+    - bash: terraform -chdir=$(infraDir) init
       displayName: 'terraform: init'
-      inputs:
-        targetType: 'inline'
-        script: 'terraform -chdir=$(infraDir) init'
       env:
         ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
         ARM_CLIENT_ID:       $(kv-arm-client-id)
         ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
         ARM_TENANT_ID:       $(kv-arm-tenant-id)
-    - task: Bash@3
+    - bash: terraform -chdir=$(infraDir) validate
       displayName: 'terraform: validate'
-      inputs:
-        targetType: 'inline'
-        script: 'terraform -chdir=$(infraDir) validate'
-    - task: Bash@3
-      displayName: 'terraform: apply'
-      inputs:
-        targetType: 'inline'
-        script: 'terraform -chdir=$(infraDir) apply -auto-approve'
+    - bash: terraform -chdir=$(infraDir) apply -auto-approve
       env:
         ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
         ARM_CLIENT_ID:       $(kv-arm-client-id)
         ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
         ARM_TENANT_ID:       $(kv-arm-tenant-id)
-    - task: Bash@3
-      displayName: 'Show files in $(Build.SourcesDirectory)'
-      inputs:
-        targetType: 'inline'
-        script: 'ls ''$(Build.SourcesDirectory)'''
-    - task: PowerShell@2
+    - powershell: tree
       displayName: 'Tree list in Build.SourcesDirectory $(Build.SourcesDirectory)'
-      inputs:
-        targetType: 'inline'
-        script: 'tree'
+    - bash: echo $(webAppName)
+      displayName: 'check webApp name'
 
+    - bash: echo "##vso[task.setvariable variable=myVar;]$(terraform -chdir=$(infraDir) output appserviceName)"
+      env:
+        ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
+        ARM_CLIENT_ID:       $(kv-arm-client-id)
+        ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
+        ARM_TENANT_ID:       $(kv-arm-tenant-id)
+    - bash: echo $(myVar)
+    
+  - job: "deployment"
+    steps:
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '$(pythonVersion)'
@@ -69,26 +57,12 @@ jobs:
         pip install -r requirements.txt
       workingDirectory: 'appServicePython'
       displayName: "Install requirements"
-
-    - bash: echo $(webAppName)
-      displayName: 'check webApp name'
-
-    - bash: echo "##vso[task.setvariable variable=myVar;]$(terraform -chdir=$(infraDir) output appserviceName)"
-      env:
-        ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
-        ARM_CLIENT_ID:       $(kv-arm-client-id)
-        ARM_CLIENT_SECRET:   $(kv-arm-client-secret)
-        ARM_TENANT_ID:       $(kv-arm-tenant-id)
-
-    - bash: echo $(myVar)
-  - job: "deployment"
-    steps:
     - task: AzureWebApp@1
       displayName: 'Deploy Azure Web App : {{ $(webAppName) }}'
       inputs:
         azureSubscription: $(azureSubscriptionEndpoint)
         appName: $(webAppName)
-        # appType: "webAppLinux"
+        appType: "webAppLinux"
         package: $(Build.SourcesDirectory)/appServicePython/
         # The following parameter is specific to the Flask example code. You may
         # or may not need a startup command for your app.

@@ -3,5 +3,5 @@ myapp = Flask(__name__)
 
 @myapp.route("/")
 def hello():
-    return "Hello Flask, on Azure App Service for Linux - before last check"
+    return "Hello Flask, on Azure App Service for Linux - 05 August 2022 check"
     
