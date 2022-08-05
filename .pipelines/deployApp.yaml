@@ -50,6 +50,7 @@ steps:
     targetType: 'inline'
     script: 'ls ''$(Build.SourcesDirectory)'''
 - task: PowerShell@2
+  displayName: 'Tree list in Build.SourcesDirectory $(Build.SourcesDirectory)'
   inputs:
     targetType: 'inline'
     script: 'tree'
@@ -57,7 +58,7 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '$(pythonVersion)'
-    displayName: 'Use Python $(pythonVersion)'
+  displayName: 'Use Python $(pythonVersion)'
 - script: |
     python -m venv antenv
     source antenv/bin/activate
@@ -69,6 +70,10 @@ steps:
 
 - bash: echo $(webAppName)
   displayName: 'check webApp name'
+
+- bash: echo "##vso[task.setvariable variable=myVar;]$(terraform -chdir=$(infraDir) output appserviceName)"
+
+- bash: echo $(myVar)
 
 - task: AzureWebApp@1
   displayName: 'Deploy Azure Web App : {{ $(webAppName) }}'
