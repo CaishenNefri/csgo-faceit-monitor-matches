@@ -13,8 +13,11 @@ def parse_request():
             "https://open.faceit.com/data/v4/players/4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb/history?game=csgo&offset=0&limit=5",
             headers={"Authorization":"Bearer ***REMOVED***"}
         )
-    print(response)
-    print(response.json())
-    return response.json()["items"][0]
+    for team in response.json()["items"][0]["teams"]:
+        print(team)
+        print(response.json()["items"][0]["teams"][team]["team_id"])
+    # return response.json()["items"][0]["teams"]
+    return "OK"
 
-# def get_player_team(match, player):  
+# def get_player_team(match, player):
+    
