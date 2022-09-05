@@ -29,6 +29,7 @@
 
 # Links
   - Faceit App: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3
+  - Faceit Developer portal: https://developers.faceit.com/
 
 
 # DATA
@@ -47,3 +48,7 @@ $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
 # Know problems
 Azure DevOps Pipeline do not see existing resource right after manually creation. Resolution: try implement terraform into pipeline | do not destry infra
   - https://github.com/microsoft/azure-pipelines-tasks/issues/15532
+
+## Python APP
+Run Python Flask server:  
+`flask --app hello.py run`
