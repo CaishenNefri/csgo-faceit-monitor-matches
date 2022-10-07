@@ -25,7 +25,7 @@ def parse_request():
 
 @myapp.route("/mejzMatches", methods=['GET', 'POST'])
 def list_maches():
-    response = getPlayerMatches(player_mejz_id, limit = 3) # function to get player matches from API
+    response = getPlayerMatches(player_mejz_id, limit = 10) # function to get player matches from API
     summary = ""
     for match in response["items"]:
         team = getPlayerTeam(match, player_mejz_id)

@@ -28,7 +28,8 @@
   - Python webpage with list of mejz matches
     - Done: Load test json not from API
     - Done: create function to call API
-    - List matches (team, score) for one player
+    - Done: List match (team, score) for one player
+    - List last 10 matches
 
 # Links
   - Faceit App: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3
