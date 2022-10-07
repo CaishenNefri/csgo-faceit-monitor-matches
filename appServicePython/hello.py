@@ -33,7 +33,7 @@ def list_maches():
         matchMap = getMatchMap(matchStats)
         matchScore = getMatchScore(matchStats)
         ifWon = ifTeamWon(match, team)    
-        match_summary = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon}"
+        match_summary = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon}}"
         print(match_summary)
         summary = summary + "<br/>" + match_summary
     return summary
@@ -79,3 +79,11 @@ def getMatchStats(match):
             headers={"Authorization":"Bearer ***REMOVED***"}
     )
     return response.json()
+
+def getPlayerElo(player):
+    response = requests.get(
+            f"https://open.faceit.com/data/v4/players/{player}}",
+            headers={"Authorization":"Bearer ***REMOVED***"}
+        )
+    toJson = response.json()
+    return toJson["games"]["csgo"]["faceit_elo"]
