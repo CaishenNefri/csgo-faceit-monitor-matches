@@ -29,9 +29,14 @@ def list_maches():
     # response = getPlayerMatches(player_mejz_id) # function to get player matches from API
     match = response["items"][4]
     team = getPlayerTeam(match, player_mejz_id)
-    print(ifTeamWon(match, team))
-    print(getMatchScore(match))
-    return "OK"
+    matchStats = getMatchStats(match)
+    matchMap = getMatchMap(matchStats)
+    matchScore = getMatchScore(matchStats)
+    ifWon = ifTeamWon(match, team)
+
+    summary = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon}"
+    print(summary)
+    return summary
 
 
 def getPlayerTeam(match, player):
@@ -61,9 +66,11 @@ def getPlayerMatches(player):
     print(response.json())
     return response.json()
 
-def getMatchScore(match):
-    stats = getMatchStats(match)
-    return stats["rounds"][0]["round_stats"]["Score"]
+def getMatchScore(matchStats):
+    return matchStats["rounds"][0]["round_stats"]["Score"]
+
+def getMatchMap(matchStats):
+    return matchStats["rounds"][0]["round_stats"]["Map"]
 
 def getMatchStats(match):
     match_id = match["match_id"]
