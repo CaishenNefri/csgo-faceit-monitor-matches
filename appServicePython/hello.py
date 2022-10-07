@@ -1,4 +1,5 @@
 from operator import truediv
+import re
 from urllib import response
 import requests
 from flask import Flask
@@ -13,13 +14,25 @@ def hello():
 
 @myapp.route("/mejz", methods=['GET', 'POST'])
 def parse_request():
-    # f = open('mejz_matches.json')
-    # response = json.load(f)
-    response = getPlayerMatches(player_mejz_id)
+    f = open('mejz_matches.json')
+    response = json.load(f)
+    # response = getPlayerMatches(player_mejz_id) # function to get player matches from API
     match = response["items"][0]
-    team = getPlayerTeam(match, "4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb")
+    team = getPlayerTeam(match, player_mejz_id)
     print(ifTeamWon(match, team))
     return "OK"
+
+@myapp.route("/mejzMatches", methods=['GET', 'POST'])
+def list_maches():
+    f = open('mejz_matches.json')
+    response = json.load(f)
+    # response = getPlayerMatches(player_mejz_id) # function to get player matches from API
+    match = response["items"][4]
+    team = getPlayerTeam(match, player_mejz_id)
+    print(ifTeamWon(match, team))
+    print(getMatchScore(match))
+    return "OK"
+
 
 def getPlayerTeam(match, player):
     for team in match["teams"]:
@@ -28,12 +41,15 @@ def getPlayerTeam(match, player):
         for gamer in match["teams"][team]["players"]:
             print(gamer["nickname"])
             if(player == gamer["player_id"]):
+                print(f"Player {player} playing for {team}")
                 return team
 
 def ifTeamWon(match, team):
     if(match["results"]["winner"] == team):
+        print(f"{team} won")
         return True
     else:
+        print(f"{team} loose")
         return False
 
 def getPlayerMatches(player):
@@ -43,4 +59,16 @@ def getPlayerMatches(player):
         )
     print("test")
     print(response.json())
+    return response.json()
+
+def getMatchScore(match):
+    stats = getMatchStats(match)
+    return stats["rounds"][0]["round_stats"]["Score"]
+
+def getMatchStats(match):
+    match_id = match["match_id"]
+    response = requests.get(
+        f"https://open.faceit.com/data/v4/matches/{match_id}/stats",
+            headers={"Authorization":"Bearer ***REMOVED***"}
+    )
     return response.json()
