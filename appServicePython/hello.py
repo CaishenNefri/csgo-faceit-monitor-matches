@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from operator import truediv
 import re
 from urllib import response
@@ -24,18 +25,17 @@ def parse_request():
 
 @myapp.route("/mejzMatches", methods=['GET', 'POST'])
 def list_maches():
-    f = open('mejz_matches.json')
-    response = json.load(f)
-    # response = getPlayerMatches(player_mejz_id) # function to get player matches from API
-    match = response["items"][4]
-    team = getPlayerTeam(match, player_mejz_id)
-    matchStats = getMatchStats(match)
-    matchMap = getMatchMap(matchStats)
-    matchScore = getMatchScore(matchStats)
-    ifWon = ifTeamWon(match, team)
-
-    summary = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon}"
-    print(summary)
+    response = getPlayerMatches(player_mejz_id, limit = 3) # function to get player matches from API
+    summary = ""
+    for match in response["items"]:
+        team = getPlayerTeam(match, player_mejz_id)
+        matchStats = getMatchStats(match)
+        matchMap = getMatchMap(matchStats)
+        matchScore = getMatchScore(matchStats)
+        ifWon = ifTeamWon(match, team)    
+        match_summary = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon}"
+        print(match_summary)
+        summary = summary + "<br/>" + match_summary
     return summary
 
 
@@ -57,9 +57,9 @@ def ifTeamWon(match, team):
         print(f"{team} loose")
         return False
 
-def getPlayerMatches(player):
+def getPlayerMatches(player, offset = 0, limit = 10):
     response = requests.get(
-            f"https://open.faceit.com/data/v4/players/{player}/history?game=csgo&offset=0&limit=5",
+            f"https://open.faceit.com/data/v4/players/{player}/history?game=csgo&offset={offset}&limit={limit}",
             headers={"Authorization":"Bearer ***REMOVED***"}
         )
     print("test")
