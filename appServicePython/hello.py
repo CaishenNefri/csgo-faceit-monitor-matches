@@ -1,10 +1,14 @@
 from asyncio.windows_events import NULL
+from dataclasses import dataclass
 from operator import truediv
 import re
 from urllib import response
 import requests
 from flask import Flask
 import json
+from datetime import datetime #To convert TimeStamp
+from dateutil import tz #To use CET instead UTC
+
 myapp = Flask(__name__)
 
 player_mejz_id = "4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb"
@@ -19,8 +23,8 @@ def parse_request():
     response = json.load(f)
     # response = getPlayerMatches(player_mejz_id) # function to get player matches from API
     match = response["items"][0]
-    team = getPlayerTeam(match, player_mejz_id)
-    print(ifTeamWon(match, team))
+    timeMatch =  getMatchTimeFinish(match)
+    print(timeMatch)
     return "OK"
 
 @myapp.route("/mejzMatches", methods=['GET', 'POST'])
@@ -33,7 +37,8 @@ def list_maches():
         matchMap = getMatchMap(matchStats)
         matchScore = getMatchScore(matchStats)
         ifWon = ifTeamWon(match, team)    
-        match_summary = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon}}"
+        timeMatchFinished = getMatchTimeFinish(match)
+        match_summary = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon} | Finished at: {timeMatchFinished}"
         print(match_summary)
         summary = summary + "<br/>" + match_summary
     return summary
@@ -82,8 +87,14 @@ def getMatchStats(match):
 
 def getPlayerElo(player):
     response = requests.get(
-            f"https://open.faceit.com/data/v4/players/{player}}",
+            f"https://open.faceit.com/data/v4/players/{player}",
             headers={"Authorization":"Bearer ***REMOVED***"}
         )
     toJson = response.json()
     return toJson["games"]["csgo"]["faceit_elo"]
+
+def getMatchTimeFinish(match):
+    timeStamp = match["finished_at"] # get timestamp from json match details
+    date_time = datetime.fromtimestamp(timeStamp, tz=tz.gettz("Europe/Warsaw")) # convert timestamp to to datetime object and switch to "Europe/Warsaw" timezone
+    date_time = date_time.strftime("%m/%d/%Y, %H:%M:%S") # convert datiem to human read string
+    return date_time
