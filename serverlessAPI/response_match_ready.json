@@ -1,0 +1,150 @@
+{
+    "transaction_id": "b3f744c3-a57e-44d5-9f0c-ee211a3fa068",
+    "event": "match_status_ready",
+    "event_id": "8b359ba5-18d9-407f-8633-93b9fd98035b",
+    "third_party_id": "5ba2c07d-072c-4db9-a08d-be94f905899c",
+    "app_id": "5f1ce3c7-a4f1-4bba-89e2-7851728477d3",
+    "timestamp": "2021-09-19T21:41:11Z",
+    "retry_count": 0,
+    "version": 1,
+    "payload": {
+        "id": "1-40ec725a-f5fd-49f5-b840-fec868a904b2",
+        "organizer_id": "8bfed0d9-1fdf-4182-931a-6cb63571d3c6",
+        "region": "EU",
+        "game": "csgo",
+        "version": 26,
+        "entity": {
+            "id": "18d8cc72-e76a-43f0-bbd3-ca7cf48a6115",
+            "name": "PPL Dywizja I",
+            "type": "hub"
+        },
+        "teams": [
+            {
+                "id": "562c8a3c-ce0a-48c1-8d77-8d432d1bf4ea",
+                "name": "team_aleer",
+                "type": "",
+                "avatar": "",
+                "leader_id": "562c8a3c-ce0a-48c1-8d77-8d432d1bf4ea",
+                "co_leader_id": "",
+                "roster": [
+                    {
+                        "id": "562c8a3c-ce0a-48c1-8d77-8d432d1bf4ea",
+                        "nickname": "aleer",
+                        "avatar": "",
+                        "game_id": "76561198198251155",
+                        "game_name": "aler",
+                        "game_skill_level": 10,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "aae0d488-0aac-4121-b99f-6689d44422ed",
+                        "nickname": "05BLACK05",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/aae0d488-0aac-4121-b99f-6689d44422ed_1631805488425.jpg",
+                        "game_id": "76561198845427533",
+                        "game_name": "05BLACK05",
+                        "game_skill_level": 9,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "57bccb74-ff04-4ec6-a239-740eac5b12e2",
+                        "nickname": "RenZoRihnio",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/57bccb74-ff04-4ec6-a239-740eac5b12e2_1551040136460.jpg",
+                        "game_id": "76561198030513485",
+                        "game_name": "RenZoR",
+                        "game_skill_level": 8,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "398d3a77-6b79-44fe-981d-9e48219361c2",
+                        "nickname": "man1esza",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/398d3a77-6b79-44fe-981d-9e48219361c2_1567696653763.jpg",
+                        "game_id": "76561198041402476",
+                        "game_name": "man1esza",
+                        "game_skill_level": 10,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "ba865028-be58-477b-adba-d3216461ef1a",
+                        "nickname": "Ka_P_eC",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/ba865028-be58-477b-adba-d3216461ef1a_1599758320652.jpg",
+                        "game_id": "76561197988934652",
+                        "game_name": "Ka[P]eC",
+                        "game_skill_level": 6,
+                        "membership": "",
+                        "anticheat_required": true
+                    }
+                ],
+                "substitutions": 0,
+                "substitutes": null
+            },
+            {
+                "id": "09765373-2452-4509-a749-ade0bc773734",
+                "name": "team_mcbride",
+                "type": "",
+                "avatar": "https://assets.faceit-cdn.net/avatars/09765373-2452-4509-a749-ade0bc773734_1600451576423.jpg",
+                "leader_id": "09765373-2452-4509-a749-ade0bc773734",
+                "co_leader_id": "",
+                "roster": [
+                    {
+                        "id": "09765373-2452-4509-a749-ade0bc773734",
+                        "nickname": "mcbride",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/09765373-2452-4509-a749-ade0bc773734_1600451576423.jpg",
+                        "game_id": "76561198083386208",
+                        "game_name": "mcbride",
+                        "game_skill_level": 10,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "034743b8-429f-4565-9728-0a58f72b385c",
+                        "nickname": "W_E_X",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/034743b8-429f-4565-9728-0a58f72b385c_1630875346691.jpg",
+                        "game_id": "76561198213603376",
+                        "game_name": "W_E_X",
+                        "game_skill_level": 9,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "f9ba642c-7782-4e40-bfec-b3fdf088bb9b",
+                        "nickname": "Mistrzowsky",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/f9ba642c-7782-4e40-bfec-b3fdf088bb9b_1631722532348.jpg",
+                        "game_id": "76561198223362220",
+                        "game_name": "мιѕтяzσωѕky",
+                        "game_skill_level": 8,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "a0f307e2-e121-4f38-b7b5-7e92ebbc0e15",
+                        "nickname": "plaku_",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/a0f307e2-e121-4f38-b7b5-7e92ebbc0e15_1622586073477.jpg",
+                        "game_id": "76561198416179779",
+                        "game_name": "plaku",
+                        "game_skill_level": 8,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "84447d23-372e-4076-9719-947c3b3cd3d3",
+                        "nickname": "LIICHOO",
+                        "avatar": "",
+                        "game_id": "76561198166000621",
+                        "game_name": "LIICHOO",
+                        "game_skill_level": 7,
+                        "membership": "",
+                        "anticheat_required": true
+                    }
+                ],
+                "substitutions": 0,
+                "substitutes": null
+            }
+        ],
+        "created_at": "2021-09-19T21:38:57Z",
+        "updated_at": "2021-09-19T21:41:11Z"
+    }
+}

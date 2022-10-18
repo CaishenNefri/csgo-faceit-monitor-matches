@@ -25,11 +25,15 @@
     - Azure DevOps personal access token
     - service principal for terraform
   - 
-  - Python webpage with list of mejz matches
+  - Done: Python webpage with list of mejz matches
     - Done: Load test json not from API
     - Done: create function to call API
     - Done: List match (team, score) for one player
-    - List last 10 matches
+    - Done: List last 10 matches
+    - Done: Add time when match finished: https://realpython.com/python-datetime/
+  - Create Python Function to catch webhook
+    - Create terraform Infra with Azure Function
+    - Prepare helloworld code to grap data
 
 # Links
   - Faceit App: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3
@@ -44,6 +48,14 @@
 - Mejz id - player_id:
     - >4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb
 
+## Players IDs
+mejz    : '4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb',
+lewy    : '78491fee-bcdb-46d2-b9df-cae69862e01c',
+neo     : '00c0c7ae-3e57-45d3-82c2-c167fd45fdaf',
+kapa    : '993fa04b-8e3b-4964-b9f0-32ca1584e699',
+hajsen  : '14cadb67-6c68-4896-99d3-e3f8a5d509b1',
+caishen : '5ba2c07d-072c-4db9-a08d-be94f905899c'
+
 # Set env variable
 $env:AZDO_PERSONAL_ACCESS_TOKEN="***REMOVED***"
 $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
@@ -53,6 +65,15 @@ $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
 Azure DevOps Pipeline do not see existing resource right after manually creation. Resolution: try implement terraform into pipeline | do not destry infra
   - https://github.com/microsoft/azure-pipelines-tasks/issues/15532
 
-## Python APP
+# Python APP - website
+Install reqiriments:
+`pip install -r requirements.txt`
 Run Python Flask server:  
-`flask --app hello.py run`
+`flask --app hello.py run`+
+
+# Azure Function - grap webhooks from Faceit
+Faceit Dev can send webhook data when it's subscribed: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3/webhooks
+We have to put IDs of players to get infromaiton about status.  
+
+## Implementation:  
+Azure Function is used as serverless API to receiving Faceit's webhooks

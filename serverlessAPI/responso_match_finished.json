@@ -1,0 +1,152 @@
+{
+    "transaction_id": "11319296-3b20-4e46-8bfb-f4e794114748",
+    "event": "match_status_finished",
+    "event_id": "eca9b693-8b29-4e41-9626-c43b7e7210af",
+    "third_party_id": "5ba2c07d-072c-4db9-a08d-be94f905899c",
+    "app_id": "5f1ce3c7-a4f1-4bba-89e2-7851728477d3",
+    "timestamp": "2021-09-19T21:37:39Z",
+    "retry_count": 0,
+    "version": 1,
+    "payload": {
+        "id": "1-91e33397-e9df-4885-b874-4e4755f0d2eb",
+        "organizer_id": "8bfed0d9-1fdf-4182-931a-6cb63571d3c6",
+        "region": "EU",
+        "game": "csgo",
+        "version": 56,
+        "entity": {
+            "id": "18d8cc72-e76a-43f0-bbd3-ca7cf48a6115",
+            "name": "PPL Dywizja I",
+            "type": "hub"
+        },
+        "teams": [
+            {
+                "id": "d6c665e5-6e4a-4438-a30d-10f0551179a9",
+                "name": "team_Mpmm",
+                "type": "",
+                "avatar": "",
+                "leader_id": "d6c665e5-6e4a-4438-a30d-10f0551179a9",
+                "co_leader_id": "",
+                "roster": [
+                    {
+                        "id": "d6c665e5-6e4a-4438-a30d-10f0551179a9",
+                        "nickname": "Mpmm",
+                        "avatar": "",
+                        "game_id": "76561198017182075",
+                        "game_name": "MpM.",
+                        "game_skill_level": 10,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "d6bcb114-5b3f-48fa-b90d-bea8f985bee3",
+                        "nickname": "-Cheen-",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/d6bcb114-5b3f-48fa-b90d-bea8f985bee3_1630697678613.jpg",
+                        "game_id": "76561198017938368",
+                        "game_name": "76561198017938368",
+                        "game_skill_level": 7,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "a0f307e2-e121-4f38-b7b5-7e92ebbc0e15",
+                        "nickname": "plaku_",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/a0f307e2-e121-4f38-b7b5-7e92ebbc0e15_1622586073477.jpg",
+                        "game_id": "76561198416179779",
+                        "game_name": "plaku",
+                        "game_skill_level": 7,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "ba865028-be58-477b-adba-d3216461ef1a",
+                        "nickname": "Ka_P_eC",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/ba865028-be58-477b-adba-d3216461ef1a_1599758320652.jpg",
+                        "game_id": "76561197988934652",
+                        "game_name": "Ka[P]eC",
+                        "game_skill_level": 6,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "57bccb74-ff04-4ec6-a239-740eac5b12e2",
+                        "nickname": "RenZoRihnio",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/57bccb74-ff04-4ec6-a239-740eac5b12e2_1551040136460.jpg",
+                        "game_id": "76561198030513485",
+                        "game_name": "RenZoR",
+                        "game_skill_level": 8,
+                        "membership": "",
+                        "anticheat_required": true
+                    }
+                ],
+                "substitutions": 0,
+                "substitutes": null
+            },
+            {
+                "id": "398d3a77-6b79-44fe-981d-9e48219361c2",
+                "name": "team_man1esza",
+                "type": "",
+                "avatar": "https://assets.faceit-cdn.net/avatars/398d3a77-6b79-44fe-981d-9e48219361c2_1567696653763.jpg",
+                "leader_id": "398d3a77-6b79-44fe-981d-9e48219361c2",
+                "co_leader_id": "",
+                "roster": [
+                    {
+                        "id": "398d3a77-6b79-44fe-981d-9e48219361c2",
+                        "nickname": "man1esza",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/398d3a77-6b79-44fe-981d-9e48219361c2_1567696653763.jpg",
+                        "game_id": "76561198041402476",
+                        "game_name": "man1esza",
+                        "game_skill_level": 10,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "aae0d488-0aac-4121-b99f-6689d44422ed",
+                        "nickname": "05BLACK05",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/aae0d488-0aac-4121-b99f-6689d44422ed_1631805488425.jpg",
+                        "game_id": "76561198845427533",
+                        "game_name": "05BLACK05",
+                        "game_skill_level": 9,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "84447d23-372e-4076-9719-947c3b3cd3d3",
+                        "nickname": "LIICHOO",
+                        "avatar": "",
+                        "game_id": "76561198166000621",
+                        "game_name": "LIICHOO",
+                        "game_skill_level": 8,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "c7568c0e-d019-425d-85f0-631b5a88a9ac",
+                        "nickname": "FightAk",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/c7568c0e-d019-425d-85f0-631b5a88a9ac_1550735320299.jpg",
+                        "game_id": "76561198194169701",
+                        "game_name": "FightAk",
+                        "game_skill_level": 6,
+                        "membership": "",
+                        "anticheat_required": true
+                    },
+                    {
+                        "id": "f9ba642c-7782-4e40-bfec-b3fdf088bb9b",
+                        "nickname": "Mistrzowsky",
+                        "avatar": "https://assets.faceit-cdn.net/avatars/f9ba642c-7782-4e40-bfec-b3fdf088bb9b_1631722532348.jpg",
+                        "game_id": "76561198223362220",
+                        "game_name": "мιѕтяzσωѕky",
+                        "game_skill_level": 8,
+                        "membership": "",
+                        "anticheat_required": true
+                    }
+                ],
+                "substitutions": 0,
+                "substitutes": null
+            }
+        ],
+        "created_at": "2021-09-19T20:48:54Z",
+        "updated_at": "2021-09-19T21:37:38Z",
+        "started_at": "2021-09-19T20:58:11Z",
+        "finished_at": "2021-09-19T21:37:38Z"
+    }
+}
