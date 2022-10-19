@@ -6,7 +6,7 @@ variables:
   - name: azureSubscriptionEndpoint
     value: AzureRM
   - name: pythonVersion
-    value: "3.9"
+    value: "3.8"
   - name: infraDir
     value: '"$(Build.SourcesDirectory)/infrastructure"'
 

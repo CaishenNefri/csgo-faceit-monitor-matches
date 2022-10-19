@@ -74,7 +74,7 @@ resource "azurerm_linux_web_app" "webapp" {
     always_on        = false
     app_command_line = "gunicorn --bind=0.0.0.0 --timeout 600 hello:myapp"
     application_stack {
-      python_version = "3.9"
+      python_version = "3.8"
     }
   }
 }
