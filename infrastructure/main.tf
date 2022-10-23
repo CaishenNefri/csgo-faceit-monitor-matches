@@ -48,6 +48,11 @@ resource "azuredevops_variable_group" "vg" {
     name  = "webAppName"
     value = azurerm_linux_web_app.webapp.name
   }
+
+  variable {
+    name = "funAppName"
+    value = azurerm_linux_function_app.functionapp.name
+  }
 }
 
 
