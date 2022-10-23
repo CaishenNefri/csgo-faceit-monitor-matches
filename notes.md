@@ -33,7 +33,11 @@
     - Done: Add time when match finished: https://realpython.com/python-datetime/
   - Create Python Function to catch webhook
     - Create terraform Infra with Azure Function
-    - Prepare helloworld code to grap data
+    - Prepare helloworld code to grap data from Postman
+    - Deploy App to Azure Function
+    - Prepare Pipeline for deploying
+  - Add some kind of monitoring or diagnostic settings
+  - Move Python code to container
 
 # Links
   - Faceit App: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3
