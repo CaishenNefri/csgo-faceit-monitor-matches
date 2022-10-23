@@ -78,7 +78,7 @@ stages:
 
   - stage: "deployment"
     jobs:
-      - job: "Deploy WebAppService"
+      - job:
         displayName: "Deploy WebAppService"
         steps:
         - task: UsePythonVersion@0
@@ -103,7 +103,7 @@ stages:
             # The following parameter is specific to the Flask example code. You may
             # or may not need a startup command for your app.
             startUpCommand: 'gunicorn --bind=0.0.0.0 --timeout 600 hello:myapp'
-      - job: "Deploy FunAppService"
+      - job:
         displayName: "Deploy FunctionAppService"
         steps:
         - task: UsePythonVersion@0
