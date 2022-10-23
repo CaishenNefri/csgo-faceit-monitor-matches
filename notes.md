@@ -93,4 +93,4 @@ We have to put IDs of players to get infromaiton about status.
 
 ## Implementation:  
 Azure Function is used as serverless API to receiving Faceit's webhooks
-https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook?tabs=in-process%2Cfunctionsv2&pivots=programming-language-python
+https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-python
