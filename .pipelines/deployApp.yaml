@@ -119,10 +119,20 @@ stages:
             pip install -r requirements.txt
           workingDirectory: 'serverlessAPI'
           displayName: "Install requirements"
+        - task: ArchiveFiles@2
+          displayName: "Archive files"
+          inputs:
+            rootFolderOrFile: "$(Build.SourcesDirectory)/serverlessAPI/"
+            includeRootFolder: false
+            archiveFile: "$(Build.SourcesDirectory)/serverlessAPI/build$(Build.BuildId).zip"
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
+            artifactName: 'drop'
         - task: AzureFunctionApp@1
           displayName: 'Deploy Azure Function App : {{ $(funAppName) }}'
           inputs:
             azureSubscription: $(azureSubscriptionEndpoint)
             appName: $(funAppName)
             appType: "functionAppLinux"
-            package: $(Build.SourcesDirectory)/serverlessAPI/
+            package: $(System.ArtifactsDirectory)/**/*.zip
