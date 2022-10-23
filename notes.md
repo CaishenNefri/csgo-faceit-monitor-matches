@@ -42,6 +42,8 @@
     - create terraform plan artifact
     - use artifact in apply
     - create approve step for prod
+  - Divide Install requriments job from deploying job by doing stages
+
 
 # Links
   - Faceit App: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3
@@ -70,8 +72,14 @@ $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
 
 
 # Know problems
-Azure DevOps Pipeline do not see existing resource right after manually creation. Resolution: try implement terraform into pipeline | do not destry infra
+1. Azure DevOps Pipeline do not see existing resource right after manually creation. Resolution: try implement terraform into pipeline | do not destry infra
   - https://github.com/microsoft/azure-pipelines-tasks/issues/15532
+  - `https://www.garyjackson.dev/posts/azure-function-app-conflicting-plans/`
+  - Not Mitigated: need to way untill is accesible 
+2. Web Service Plan must be created after Function App Serivce Plan:
+  - https://www.garyjackson.dev/posts/azure-function-app-conflicting-plans/
+  - https://github.com/hashicorp/terraform-provider-azurerm/issues/10020
+  - Mitigated: by removing all infra and recreate them with depends_on 
 
 # Python APP - website
 Install reqiriments:
@@ -85,3 +93,4 @@ We have to put IDs of players to get infromaiton about status.
 
 ## Implementation:  
 Azure Function is used as serverless API to receiving Faceit's webhooks
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook?tabs=in-process%2Cfunctionsv2&pivots=programming-language-python

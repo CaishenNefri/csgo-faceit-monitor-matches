@@ -65,6 +65,10 @@ resource "azurerm_service_plan" "serviceplan" {
 
   depends_on = [
     azurerm_service_plan.functionplan
+    /* The reason why Service Plan depends on Function Service Plan:
+      https://www.garyjackson.dev/posts/azure-function-app-conflicting-plans/
+      Shortcut: can not be created before due some internal Azure Error
+    */
   ]
 }
 
