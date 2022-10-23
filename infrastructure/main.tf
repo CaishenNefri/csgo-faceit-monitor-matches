@@ -62,6 +62,10 @@ resource "azurerm_service_plan" "serviceplan" {
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
   sku_name            = "F1"
+
+  depends_on = [
+    azurerm_service_plan.functionplan
+  ]
 }
 
 resource "azurerm_linux_web_app" "webapp" {
@@ -88,7 +92,7 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_service_plan" "functionapp" {
+resource "azurerm_service_plan" "functionplan" {
   name                = "service-plan-app-${random_integer.ri.result}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -103,7 +107,7 @@ resource "azurerm_linux_function_app" "functionapp" {
 
   storage_account_name       = azurerm_storage_account.storage.name
   storage_account_access_key = azurerm_storage_account.storage.secondary_access_key
-  service_plan_id            = azurerm_service_plan.functionapp.id
+  service_plan_id            = azurerm_service_plan.functionplan.id
 
   site_config {}
 }

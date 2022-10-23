@@ -38,6 +38,10 @@
     - Prepare Pipeline for deploying
   - Add some kind of monitoring or diagnostic settings
   - Move Python code to container
+  - Add step to terraform infa: produce artifact with terraform plan out
+    - create terraform plan artifact
+    - use artifact in apply
+    - create approve step for prod
 
 # Links
   - Faceit App: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3
