@@ -78,7 +78,8 @@ stages:
 
   - stage: "deployment"
     jobs:
-      - job:
+      - job: "Deploy WebAppService"
+        displayName: "Deploy WebAppService"
         steps:
         - task: UsePythonVersion@0
           inputs:
@@ -102,3 +103,26 @@ stages:
             # The following parameter is specific to the Flask example code. You may
             # or may not need a startup command for your app.
             startUpCommand: 'gunicorn --bind=0.0.0.0 --timeout 600 hello:myapp'
+      - job: "Deploy FunAppService"
+        displayName: "Deploy FunctionAppService"
+        steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.9'
+            architecture: 'x64'
+          displayName: 'Use Python 3.9'
+        - script: |
+            python -m venv antenv
+            source antenv/bin/activate
+            python -m pip install --upgrade pip
+            pip install setup
+            pip install -r requirements.txt
+          workingDirectory: 'serverlessAPI'
+          displayName: "Install requirements"
+        - task: AzureFunctionApp@1
+          displayName: 'Deploy Azure Function App : {{ $(funAppName) }}'
+          inputs:
+            azureSubscription: $(azureSubscriptionEndpoint)
+            appName: $(funAppName)
+            appType: "functionAppLinux"
+            package: $(Build.SourcesDirectory)/serverlessAPI/
