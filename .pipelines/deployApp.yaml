@@ -135,4 +135,4 @@ stages:
             azureSubscription: $(azureSubscriptionEndpoint)
             appName: $(funAppName)
             appType: "functionAppLinux"
-            package: $(System.ArtifactsDirectory)/**/*.zip
+            package: $(System.ArtifactsDirectory)/**/drop
