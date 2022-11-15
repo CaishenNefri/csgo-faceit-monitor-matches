@@ -32,10 +32,15 @@
     - Done: List last 10 matches
     - Done: Add time when match finished: https://realpython.com/python-datetime/
   - Create Python Function to catch webhook
-    - Create terraform Infra with Azure Function
-    - Prepare helloworld code to grap data from Postman
-    - Deploy App to Azure Function
-    - Prepare Pipeline for deploying
+    - Done: Create terraform Infra with Azure Function
+    - Done: Prepare helloworld code to grap data from Postman
+      - https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-python?pivots=python-mode-configuration
+      - https://learn.microsoft.com/en-us/azure/azure-functions/scripts/functions-cli-create-serverless-python
+      - https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-python?pivots=python-mode-decorators
+    - Done: Deploy App to Azure Function
+    - Save grabbed code to Storage Account Table
+    - Tweak code: collect Faceit raw request from postman
+    - Tweak deploying to use artifacts
   - Add some kind of monitoring or diagnostic settings
   - Move Python code to container
   - Add step to terraform infa: produce artifact with terraform plan out
