@@ -39,6 +39,7 @@
       - https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-python?pivots=python-mode-decorators
     - Done: Deploy App to Azure Function
     - Save grabbed code to Storage Account Table
+      - Example for adding msg to queue: https://learn.microsoft.com/en-us/azure/azure-functions/functions-add-output-binding-storage-queue-vs-code?tabs=in-process&pivots=programming-language-python
     - Tweak code: collect Faceit raw request from postman
     - Tweak deploying to use artifacts
   - Add some kind of monitoring or diagnostic settings
