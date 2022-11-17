@@ -38,7 +38,7 @@
       - https://learn.microsoft.com/en-us/azure/azure-functions/scripts/functions-cli-create-serverless-python
       - https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-python?pivots=python-mode-decorators
     - Done: Deploy App to Azure Function
-    - Save grabbed code to Storage Account Table
+    - Done: Save grabbed code to Storage Account Table
       - Example for adding msg to queue: https://learn.microsoft.com/en-us/azure/azure-functions/functions-add-output-binding-storage-queue-vs-code?tabs=in-process&pivots=programming-language-python
       - Example for using tables: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-table-output?tabs=in-process%2Cstorage-extension&pivots=programming-language-python
       - Can not use dynamic table name (why? no fuckinf idea). have to use Pyhon SDK
@@ -46,7 +46,7 @@
         - https://pypi.org/project/azure-storage-blob/
         - https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication-overview
       - Done: Create table from request: Table Contributor must be granted!!!
-    - Use different tables
+    - Done: Use different tables
     - Create managed identity
     - Tweak code: collect Faceit raw request from postman
     - grap storage account url from Terraform/Variable/etc
