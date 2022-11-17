@@ -1,6 +1,4 @@
 import logging
-import uuid
-import json
 
 import azure.functions as func
 
@@ -9,7 +7,7 @@ from azure.identity import DefaultAzureCredential
 from azure.data.tables import TableServiceClient
 
 
-def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage], outputTable: func.Out[str]) -> str:
+def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     # Acquire a credential object
@@ -34,19 +32,10 @@ def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage], outputTable: f
             name = req_body.get('name')
 
     if name:
-        msg.set(name)
-
         logging.info(f"Try to create table {name}")
         table_service_client.create_table_if_not_exists(name)
 
-        rowKey = str(uuid.uuid4())
-        data = {
-            "Name": "Output bindin message",
-            "PartitionKey": "message",
-            "RowKey": rowKey
-        }
-        outputTable.set(json.dumps(data))
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully. RowKey: {rowKey}")
+        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
     else:
         return func.HttpResponse(
              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",

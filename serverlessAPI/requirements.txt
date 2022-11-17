@@ -4,11 +4,6 @@
 
 azure-functions
 
-# Example for Binding to table
-uuid
-# json
-# Example for Binding to table
-
 # Using Python SDK
 azure-identity
 azure-data-tables
