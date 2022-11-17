@@ -45,7 +45,7 @@
         - https://pypi.org/project/azure-data-tables/
         - https://pypi.org/project/azure-storage-blob/
         - https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication-overview
-      - Create table from request
+      - Done: Create table from request: Table Contributor must be granted!!!
     - Use different tables
     - Create managed identity
     - Tweak code: collect Faceit raw request from postman

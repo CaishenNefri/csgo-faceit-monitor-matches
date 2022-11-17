@@ -18,11 +18,11 @@ def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage], outputTable: f
         endpoint="https://storage69415.table.core.windows.net",
         credential=credential)
 
-    listed_tables = table_service_client.list_tables()
+    # listed_tables = table_service_client.list_tables()
 
-    print("Listed_tables")
-    for table in listed_tables:
-        print("\t{}".format(table.name))
+    # print("Listed_tables")
+    # for table in listed_tables:
+    #     print("\t{}".format(table.name))
 
     name = req.params.get('name')
     if not name:
@@ -35,6 +35,9 @@ def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage], outputTable: f
 
     if name:
         msg.set(name)
+
+        logging.info(f"Try to create table {name}")
+        table_service_client.create_table_if_not_exists(name)
 
         rowKey = str(uuid.uuid4())
         data = {
