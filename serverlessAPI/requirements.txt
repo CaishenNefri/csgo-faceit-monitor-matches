@@ -8,3 +8,8 @@ azure-functions
 uuid
 # json
 # Example for Binding to table
+
+# Using Python SDK
+azure-identity
+azure-data-tables
+azure-storage-blob

@@ -41,6 +41,11 @@
     - Save grabbed code to Storage Account Table
       - Example for adding msg to queue: https://learn.microsoft.com/en-us/azure/azure-functions/functions-add-output-binding-storage-queue-vs-code?tabs=in-process&pivots=programming-language-python
       - Example for using tables: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-table-output?tabs=in-process%2Cstorage-extension&pivots=programming-language-python
+      - Can not use dynamic table name (why? no fuckinf idea). have to use Pyhon SDK
+        - https://pypi.org/project/azure-data-tables/
+        - https://pypi.org/project/azure-storage-blob/
+        - https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication-overview
+        - 
     - Use different tables
     - Tweak code: collect Faceit raw request from postman
   - Add some kind of monitoring or diagnostic settings
