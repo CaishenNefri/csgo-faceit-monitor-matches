@@ -47,7 +47,10 @@
         - https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication-overview
       - Done: Create table from request: Table Contributor must be granted!!!
     - Done: Use different tables
-    - Create managed identity
+    - Create managed identity -> user user assigned idenitity instead
+      - managed identity can not be created and used in one terraform apply run -->> https://github.com/hashicorp/terraform/issues/29923
+      - assign permission to terraform service prencipal to be able to assign permissions
+      - create user managed identity
     - Tweak code: collect Faceit raw request from postman
     - grap storage account url from Terraform/Variable/etc
   - Add some kind of monitoring or diagnostic settings
