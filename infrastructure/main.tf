@@ -126,15 +126,15 @@ resource "azurerm_linux_function_app" "functionapp" {
 }
 
 # Grant Storage Table Data Contributor permission for managed idenitty of Function to storage account
-# resource "azurerm_role_assignment" "function_identity" {
-#   scope                = azurerm_storage_account.storage.id
-#   role_definition_name = "Storage Table Data Contributor"
-#   principal_id         = azurerm_linux_function_app.functionapp.identity[0].principal_id
+resource "azurerm_role_assignment" "function_identity" {
+  scope                = azurerm_storage_account.storage.id
+  role_definition_name = "Storage Table Data Contributor"
+  principal_id         = azurerm_linux_function_app.functionapp.identity[0].principal_id
 
-#   depends_on = [
-#     azurerm_linux_function_app.functionapp
-#   ]
-# }
+  depends_on = [
+    azurerm_linux_function_app.functionapp
+  ]
+}
 ### END Function APP
 
 
