@@ -2,7 +2,7 @@ import logging
 
 import azure.functions as func
 
-from azure.identity import DefaultAzureCredential
+# from azure.identity import DefaultAzureCredential
 # from azure.storage.blob import BlobServiceClient
 from azure.data.tables import TableServiceClient
 
