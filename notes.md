@@ -47,7 +47,9 @@
         - https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication-overview
         - 
     - Use different tables
+    - Create managed identity
     - Tweak code: collect Faceit raw request from postman
+    - grap storage account url from Terraform/Variable/etc
   - Add some kind of monitoring or diagnostic settings
   - Move Python code to container
   - Add step to terraform infa: produce artifact with terraform plan out

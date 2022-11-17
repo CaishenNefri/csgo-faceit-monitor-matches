@@ -5,7 +5,8 @@ import json
 import azure.functions as func
 
 from azure.identity import DefaultAzureCredential
-from azure.storage.blob import BlobServiceClient
+# from azure.storage.blob import BlobServiceClient
+from azure.data.tables import TableServiceClient
 
 
 def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage], outputTable: func.Out[str]) -> str:
@@ -13,13 +14,17 @@ def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage], outputTable: f
 
     # Acquire a credential object
     credential = DefaultAzureCredential()
-    blob_service_client = BlobServiceClient(
-        account_url="https://storage69415.blob.core.windows.net",
+    table_service_client = TableServiceClient(
+        endpoint="https://storage69415.table.core.windows.net",
         credential=credential)
 
-    containers = blob_service_client.list_containers()
-    for container in containers:
-            print(container['name'])
+    table_name = "mytable1"
+    name_filter = "TableName ne '{}'".format(table_name)
+    queried_tables = table_service_client.query_tables(name_filter)
+
+    print("Queried_tables")
+    for table in queried_tables:
+        print("\t{}".format(table.name))
 
     name = req.params.get('name')
     if not name:
