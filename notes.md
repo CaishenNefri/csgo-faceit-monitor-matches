@@ -40,8 +40,9 @@
     - Done: Deploy App to Azure Function
     - Save grabbed code to Storage Account Table
       - Example for adding msg to queue: https://learn.microsoft.com/en-us/azure/azure-functions/functions-add-output-binding-storage-queue-vs-code?tabs=in-process&pivots=programming-language-python
+      - Example for using tables: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-table-output?tabs=in-process%2Cstorage-extension&pivots=programming-language-python
+    - Use different tables
     - Tweak code: collect Faceit raw request from postman
-    - Tweak deploying to use artifacts
   - Add some kind of monitoring or diagnostic settings
   - Move Python code to container
   - Add step to terraform infa: produce artifact with terraform plan out
@@ -49,6 +50,8 @@
     - use artifact in apply
     - create approve step for prod
   - Divide Install requriments job from deploying job by doing stages
+  - Azure Function use Identity to access Storage Acccount Table
+  - Tweak deploying to use artifacts
 
 
 # Links

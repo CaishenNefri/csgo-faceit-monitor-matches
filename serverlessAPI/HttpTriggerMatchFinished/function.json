@@ -22,6 +22,13 @@
       "name": "msg",
       "queueName": "outqueue",
       "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "table",
+      "direction": "out",
+      "name": "outputTable",
+      "tableName": "outTable",
+      "connection": "AzureWebJobsStorage"
     }
   ]
 }
