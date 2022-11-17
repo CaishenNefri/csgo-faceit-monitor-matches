@@ -18,12 +18,10 @@ def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage], outputTable: f
         endpoint="https://storage69415.table.core.windows.net",
         credential=credential)
 
-    table_name = "mytable1"
-    name_filter = "TableName ne '{}'".format(table_name)
-    queried_tables = table_service_client.query_tables(name_filter)
+    listed_tables = table_service_client.list_tables()
 
-    print("Queried_tables")
-    for table in queried_tables:
+    print("Listed_tables")
+    for table in listed_tables:
         print("\t{}".format(table.name))
 
     name = req.params.get('name')
