@@ -107,6 +107,10 @@ Install reqiriments:
 Run Python Flask server:  
 `flask --app hello.py run`+
 
+# Setup
+## Manual steps
+- Grant Terraform Service Principal permission to grant privileges 
+
 # Azure Function - grap webhooks from Faceit
 Faceit Dev can send webhook data when it's subscribed: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3/webhooks
 We have to put IDs of players to get infromaiton about status.  
