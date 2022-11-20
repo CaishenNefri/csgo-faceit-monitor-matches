@@ -118,8 +118,12 @@ resource "azurerm_linux_function_app" "functionapp" {
   storage_account_access_key = azurerm_storage_account.storage.secondary_access_key
   service_plan_id            = azurerm_service_plan.functionplan.id
 
-  site_config {}
-
+  site_config {
+    application_stack {
+      python_version = "3.9"
+    }
+  }
+  
   identity {
     type = "SystemAssigned"
   }

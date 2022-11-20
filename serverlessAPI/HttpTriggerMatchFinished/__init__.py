@@ -10,11 +10,11 @@ from azure.data.tables import TableServiceClient
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    # Acquire a credential object
-    # credential = DefaultAzureCredential()
-    # table_service_client = TableServiceClient(
-    #     endpoint="https://storage69415.table.core.windows.net",
-    #     credential=credential)
+    Acquire a credential object
+    credential = DefaultAzureCredential()
+    table_service_client = TableServiceClient(
+        endpoint="https://storage69415.table.core.windows.net",
+        credential=credential)
 
     # listed_tables = table_service_client.list_tables()
 
@@ -33,7 +33,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     if name:
         logging.info(f"Try to create table {name}")
-        # table_service_client.create_table_if_not_exists(name)
+        table_service_client.create_table_if_not_exists(name)
 
         return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
     else:

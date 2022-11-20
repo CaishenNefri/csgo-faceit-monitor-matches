@@ -112,7 +112,7 @@ stages:
             architecture: 'x64'
           displayName: 'Use Python 3.9'
         - script: |
-            pip install --target="./.python_packages/lib/site-packages" -r requirements.txt
+            pip install --target=".python_packages/lib/site-packages" -r requirements.txt
           workingDirectory: 'serverlessAPI'
           displayName: "Install requirements"
         - task: ArchiveFiles@2
