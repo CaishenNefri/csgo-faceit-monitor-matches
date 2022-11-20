@@ -123,21 +123,24 @@ resource "azurerm_linux_function_app" "functionapp" {
       python_version = "3.9"
     }
   }
-  
+
   identity {
-    type = "SystemAssigned"
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.function_identity.id]
   }
 }
 
-# Grant Storage Table Data Contributor permission for managed idenitty of Function to storage account
+resource "azurerm_user_assigned_identity" "function_identity" {
+  name                = "identity-function-app"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+}
+
+# Grant Storage Table Data Contributor permission for user assigned idenitty of Function to storage account
 resource "azurerm_role_assignment" "function_identity" {
   scope                = azurerm_storage_account.storage.id
   role_definition_name = "Storage Table Data Contributor"
-  principal_id         = azurerm_linux_function_app.functionapp.identity[0].principal_id
-
-  depends_on = [
-    azurerm_linux_function_app.functionapp
-  ]
+  principal_id         = azurerm_user_assigned_identity.function_identity.principal_id
 }
 ### END Function APP
 
