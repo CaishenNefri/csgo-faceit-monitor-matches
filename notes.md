@@ -54,6 +54,7 @@
     - Tweak code: collect Faceit raw request from postman
     - grap storage account url from Terraform/Variable/etc
   - Add some kind of monitoring or diagnostic settings
+  - Set triggers
   - Move Python code to container
   - Add step to terraform infa: produce artifact with terraform plan out
     - create terraform plan artifact
