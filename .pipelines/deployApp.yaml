@@ -112,10 +112,6 @@ stages:
             architecture: 'x64'
           displayName: 'Use Python 3.9'
         - script: |
-            python -m venv antenv
-            source antenv/bin/activate
-            python -m pip install --upgrade pip
-            pip install setup
             pip install --target="./.python_packages/lib/site-packages" -r requirements.txt
           workingDirectory: 'serverlessAPI'
           displayName: "Install requirements"
