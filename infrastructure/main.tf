@@ -122,18 +122,23 @@ resource "azurerm_linux_function_app" "functionapp" {
     application_stack {
       python_version = "3.9"
     }
+    application_insights_key = azurerm_application_insights.appinsights.instrumentation_key
   }
 
   app_settings = {
-    AZURE_CLIENT_ID                = azurerm_user_assigned_identity.function_identity.client_id
-    STORAGE_ENDPOINT_TABLE         = azurerm_storage_account.storage.primary_table_endpoint
-    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appinsights.instrumentation_key
+    AZURE_CLIENT_ID                 = azurerm_user_assigned_identity.function_identity.client_id
+    STORAGE_ENDPOINT_TABLE          = azurerm_storage_account.storage.primary_table_endpoint
+    WEBSITE_ENABLE_SYNC_UPDATE_SITE = false
   }
 
 
   identity {
     type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.function_identity.id]
+  }
+
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
 
