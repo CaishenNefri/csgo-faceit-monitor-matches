@@ -15,8 +15,8 @@
     - update main.tf
   - Done: Update terraform file: use new app service new as a variable in Azure DevOps pipeline
   - Done: Use in pipeline dynamic app-service name
-  - Add keyvault to pipeline
-  - Run Terraform from yaml pipeline
+  - Done: Add keyvault to pipeline
+  - Done: Run Terraform from yaml pipeline
     - do plan
     - do apply using generated plan
     - authenticate: https://julie.io/writing/terraform-on-azure-pipelines-best-practices/#:~:text=difficult%20to%20understand.-,Why%20does%20az%20login%20not%20work%20in%20CI/CD%3F,-In%20short%2C%20it
@@ -24,7 +24,6 @@
   - Intergrate keyvault
     - Azure DevOps personal access token
     - service principal for terraform
-  - 
   - Done: Python webpage with list of mejz matches
     - Done: Load test json not from API
     - Done: create function to call API
@@ -55,18 +54,17 @@
         - https://learn.microsoft.com/en-us/python/api/azure-identity/azure.identity.defaultazurecredential?view=azure-python#:~:text=their%20home%20tenants.-,managed_identity_client_id,-str
         - https://learn.microsoft.com/en-us/python/api/azure-identity/azure.identity.managedidentitycredential?view=azure-python
         - Use Env variable: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=asgi%2Capplication-level&pivots=python-mode-decorators#environment-variables
-    - Tweak code: collect Faceit raw request from postman
+    - collect Faceit raw request from postman
     - Done: grap storage account url from Terraform/Variable/etc -> Done via App Settings 
   - Done: Add some kind of monitoring or diagnostic settings
     - use App Insights to enable log streaming: https://learn.microsoft.com/en-us/azure/azure-functions/functions-monitoring
+    - problem with app_settings | set_config updated from nowhere
   - Set triggers
+    - Use templates
+    - condition for terraform
+    - condition for Azure Function
+    - condition for Azure WebSite
   - Move Python code to container
-  - Add step to terraform infa: produce artifact with terraform plan out
-    - create terraform plan artifact
-    - use artifact in apply
-    - create approve step for prod
-  - Divide Install requriments job from deploying job by doing stages
-  - Azure Function use Identity to access Storage Acccount Table
   - Tweak deploying to use artifacts
 
 
