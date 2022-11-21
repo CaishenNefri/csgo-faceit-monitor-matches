@@ -124,6 +124,12 @@ resource "azurerm_linux_function_app" "functionapp" {
     }
   }
 
+  app_settings = {
+    AZURE_CLIENT_ID        = azurerm_user_assigned_identity.function_identity.client_id
+    STORAGE_ENDPOINT_TABLE = azurerm_storage_account.storage.primary_table_endpoint
+  }
+
+
   identity {
     type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.function_identity.id]
