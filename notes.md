@@ -47,17 +47,18 @@
         - https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication-overview
       - Done: Create table from request: Table Contributor must be granted!!!
     - Done: Use different tables
-    - Create managed identity -> user user assigned idenitity instead
+    - Done: Create managed identity -> user user assigned idenitity instead
       - Done: managed identity can not be created and used in one terraform apply run -->> https://github.com/hashicorp/terraform/issues/29923
       - Done: assign permission to terraform service prencipal to be able to assign permissions
       - Done: create user managed identity
-      - Tweak code to use user assigned identity: 
+      - Done: Tweak code to use user assigned identity: 
         - https://learn.microsoft.com/en-us/python/api/azure-identity/azure.identity.defaultazurecredential?view=azure-python#:~:text=their%20home%20tenants.-,managed_identity_client_id,-str
         - https://learn.microsoft.com/en-us/python/api/azure-identity/azure.identity.managedidentitycredential?view=azure-python
         - Use Env variable: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=asgi%2Capplication-level&pivots=python-mode-decorators#environment-variables
     - Tweak code: collect Faceit raw request from postman
-    - grap storage account url from Terraform/Variable/etc
-  - Add some kind of monitoring or diagnostic settings
+    - Done: grap storage account url from Terraform/Variable/etc -> Done via App Settings 
+  - Done: Add some kind of monitoring or diagnostic settings
+    - use App Insights to enable log streaming: https://learn.microsoft.com/en-us/azure/azure-functions/functions-monitoring
   - Set triggers
   - Move Python code to container
   - Add step to terraform infa: produce artifact with terraform plan out

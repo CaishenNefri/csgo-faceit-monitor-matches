@@ -125,8 +125,9 @@ resource "azurerm_linux_function_app" "functionapp" {
   }
 
   app_settings = {
-    AZURE_CLIENT_ID        = azurerm_user_assigned_identity.function_identity.client_id
-    STORAGE_ENDPOINT_TABLE = azurerm_storage_account.storage.primary_table_endpoint
+    AZURE_CLIENT_ID                = azurerm_user_assigned_identity.function_identity.client_id
+    STORAGE_ENDPOINT_TABLE         = azurerm_storage_account.storage.primary_table_endpoint
+    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appinsights.instrumentation_key
   }
 
 
@@ -149,6 +150,16 @@ resource "azurerm_role_assignment" "function_identity" {
   principal_id         = azurerm_user_assigned_identity.function_identity.principal_id
 }
 ### END Function APP
+
+### Monitoring
+resource "azurerm_application_insights" "appinsights" {
+  name                = "app-insights"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  application_type    = "other"
+  retention_in_days   = "30"
+}
+### Monitoring END
 
 
 output "appserviceName" {
