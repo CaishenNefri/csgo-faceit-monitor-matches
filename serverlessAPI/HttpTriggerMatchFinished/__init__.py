@@ -1,4 +1,5 @@
 import logging
+import os
 
 import azure.functions as func
 
@@ -12,7 +13,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # Acquire a credential object
     credential = DefaultAzureCredential()
     table_service_client = TableServiceClient(
-        endpoint="https://storage69415.table.core.windows.net",
+        endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
         credential=credential)
 
     name = req.params.get('name')
