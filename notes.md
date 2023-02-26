@@ -30,7 +30,7 @@
     - Done: List match (team, score) for one player
     - Done: List last 10 matches
     - Done: Add time when match finished: https://realpython.com/python-datetime/
-  - Create Python Function to catch webhook
+  - Done: Create Python Function to catch webhook
     - Done: Create terraform Infra with Azure Function
     - Done: Prepare helloworld code to grap data from Postman
       - https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-python?pivots=python-mode-configuration
@@ -59,7 +59,16 @@
   - Done: Add some kind of monitoring or diagnostic settings
     - use App Insights to enable log streaming: https://learn.microsoft.com/en-us/azure/azure-functions/functions-monitoring
     - problem with app_settings | set_config updated from nowhere
+  - Azure Function to update table when match finishend
+  - Azure Function to be triggered when mejz finish match
+  - Azure Function Webhook Subsription provide security header and query string
+  - Save to table info about ELO points
+  - Display graph on main page
+  - Disaply last 10 matches
   - Set triggers
+    - https://pumpingco.de/blog/run-an-azure-pipelines-job-only-if-source-code-has-changed/
+    - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops
+    - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops&tabs=schema
     - Use templates
     - condition for terraform
     - condition for Azure Function
@@ -117,6 +126,7 @@ Run Python Flask server:
 # Azure Function - grap webhooks from Faceit
 Faceit Dev can send webhook data when it's subscribed: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3/webhooks
 We have to put IDs of players to get infromaiton about status.  
+
 
 ## Implementation:  
 Azure Function is used as serverless API to receiving Faceit's webhooks
