@@ -93,14 +93,6 @@ resource "azurerm_linux_web_app" "webapp" {
 }
 
 ### START Function APP
-resource "azurerm_storage_account" "storage" {
-  name                     = "storage${random_integer.ri.result}"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
 resource "azurerm_service_plan" "functionplan" {
   name                = "service-plan-app-${random_integer.ri.result}"
   location            = azurerm_resource_group.rg.location
@@ -165,6 +157,21 @@ resource "azurerm_application_insights" "appinsights" {
   retention_in_days   = "30"
 }
 ### Monitoring END
+
+### Create Storage Account with table "players"
+# table "players" contains match_finished info
+resource "azurerm_storage_account" "storage" {
+  name                     = "storage${random_integer.ri.result}"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+resource "azurerm_storage_table" "players" {
+  name                 = "players"
+  storage_account_name = azurerm_storage_account.storage.name
+}
 
 
 output "appserviceName" {
