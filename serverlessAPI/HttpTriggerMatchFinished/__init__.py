@@ -17,6 +17,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
         credential=credential)
 
+    message = req.get_json().get('payload').get('id')
+
     name = req.params.get('name')
     if not name:
         try:
@@ -32,6 +34,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         
         return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
     else:
+        logging.info(f"Create table when name is not provided {message}") 
         time_stamp = time.time()
         tableName = "players"
         entity = {
@@ -39,7 +42,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             'RowKey': str(time_stamp),
             'color': 'Purple',
             'price': '123',
-            'MatchFinished': 'Yep'
+            'MatchFinished': 'Yep',
+            'MatchId': message
         }
         table_service_client.create_table_if_not_exists(tableName)
         table_client = table_service_client.get_table_client(table_name=tableName)

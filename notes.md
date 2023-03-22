@@ -59,8 +59,8 @@
   - Done: Add some kind of monitoring or diagnostic settings
     - use App Insights to enable log streaming: https://learn.microsoft.com/en-us/azure/azure-functions/functions-monitoring
     - problem with app_settings | set_config updated from nowhere
-  - Azure Function to update table when match finishend
-  - Azure Function to be triggered when mejz finish match
+  - Done: Azure Function to update table when match finishend
+  - Azure Function get INFO who is playing - for whome we get webhook
   - Azure Function Webhook Subsription provide security header and query string
   - Save to table info about ELO points
   - Display graph on main page
