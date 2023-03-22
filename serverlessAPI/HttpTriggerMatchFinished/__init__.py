@@ -2,6 +2,8 @@ import logging
 import os
 import time
 
+import json
+
 import azure.functions as func
 
 from azure.identity import DefaultAzureCredential
@@ -17,6 +19,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
         credential=credential)
 
+    body = json.dumps(req.get_json(), indent=2)
+    logging.info(f"Payload body of request \n{body}") 
     message = req.get_json().get('payload').get('id')
 
     name = req.params.get('name')
