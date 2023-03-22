@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 
 import azure.functions as func
 
@@ -26,11 +27,24 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             name = req_body.get('name')
 
     if name:
-        logging.info(f"Try to create table {name}")
+        logging.info(f"Try to create table {name}") 
         table_service_client.create_table_if_not_exists(name)
-
+        
         return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
     else:
+        time_stamp = time.time()
+        tableName = "players"
+        entity = {
+            'PartitionKey': 'color',
+            'RowKey': str(time_stamp),
+            'color': 'Purple',
+            'price': '123',
+            'MatchFinished': 'Yep'
+        }
+        table_service_client.create_table_if_not_exists(tableName)
+        table_client = table_service_client.get_table_client(table_name=tableName)
+        entity = table_client.create_entity(entity=entity)
+
         return func.HttpResponse(
              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
              status_code=200
