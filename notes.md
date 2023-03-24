@@ -60,9 +60,10 @@
     - use App Insights to enable log streaming: https://learn.microsoft.com/en-us/azure/azure-functions/functions-monitoring
     - problem with app_settings | set_config updated from nowhere
   - Done: Azure Function to update table when match finishend
-  - Azure Function get INFO who is playing - for whome we get webhook
+  - Done: Azure Function get INFO who is playing - for whome we get webhook
+  - Done: Save to table info about ELO points
   - Azure Function Webhook Subsription provide security header and query string
-  - Save to table info about ELO points
+  - Move token from _init_.py outside code
   - Display graph on main page
   - Disaply last 10 matches
   - Set triggers
