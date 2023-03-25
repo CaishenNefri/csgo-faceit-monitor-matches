@@ -62,9 +62,14 @@
   - Done: Azure Function to update table when match finishend
   - Done: Azure Function get INFO who is playing - for whome we get webhook
   - Done: Save to table info about ELO points
+  - Display/Plot graph on main page
+    - Push dump data to table (10 matches - elo changes)
+    - Read from storage table
+    - Plot graph for one player
+    - Plot for each player
+    - Switch to real data
   - Azure Function Webhook Subsription provide security header and query string
   - Move token from _init_.py outside code
-  - Display graph on main page
   - Disaply last 10 matches
   - Set triggers
     - https://pumpingco.de/blog/run-an-azure-pipelines-job-only-if-source-code-has-changed/
