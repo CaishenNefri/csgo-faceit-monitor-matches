@@ -70,7 +70,7 @@ def plot_graph():
         date_time = datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%SZ') # Convert string TimeStamp to Date Time
         date_time = date_time.replace(tzinfo=tz.UTC) # Assign UTC to Date Time
         date_time = date_time.astimezone(tz.gettz("Europe/Warsaw")) # Convert from UTC to "Europe/Warsaw"
-        date_time = date_time.strftime("%Y/%m/%d, %H:%M:%S") # Convert Date Time to string as Chart.js is going back to UTC
+        date_time = date_time.strftime("%Y/%m/%d %H:%M") # Convert Date Time to string as Chart.js is going back to UTC
 
         data.append(entity.get("Elo")) #Append Elo to data set
         labels.append(date_time) # Append date_time to X axis for graph

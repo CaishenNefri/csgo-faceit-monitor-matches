@@ -64,8 +64,8 @@
   - Done: Save to table info about ELO points
   - Display/Plot graph on main page
     - Not needed as Mejz is gamer: Push dump data to table (10 matches - elo changes)
-    - Read from storage table
-    - Plot graph for one player
+    - Done: Read from storage table
+    - Plot graph for one player: https://www.chartjs.org/docs/latest/general/data-structures.html
     - Plot for each player
     - Switch to real data
   - Create LOCK to not delete Storage Account / terraform disable destroying
