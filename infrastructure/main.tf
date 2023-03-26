@@ -90,6 +90,11 @@ resource "azurerm_linux_web_app" "webapp" {
       python_version = "3.8"
     }
   }
+
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.function_identity.id]
+  }
 }
 
 ### START Function APP
