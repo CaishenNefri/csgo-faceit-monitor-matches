@@ -1,8 +1,13 @@
 import requests
-from flask import Flask
+from flask import Flask, render_template
 import json
 from datetime import datetime #To convert TimeStamp
 from dateutil import tz #To use CET instead UTC
+
+
+# Access to Azure Storage Account Table
+from azure.identity import DefaultAzureCredential
+from azure.data.tables import TableServiceClient
 
 myapp = Flask(__name__)
 
@@ -37,6 +42,45 @@ def list_maches():
         print(match_summary)
         summary = summary + "<br/>" + match_summary
     return summary
+
+@myapp.route("/graph", methods=['GET', 'POST'])
+def plot_graph():
+    credential = DefaultAzureCredential()
+    table_service_client = TableServiceClient(
+        endpoint="https://storage69415.table.core.windows.net/",
+        credential=credential)
+
+    table_client = table_service_client.get_table_client(table_name="players")
+    # got_entity = table_client.get_entity(partition_key="4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb", row_key="2023-03-25T18:04:13Z")
+
+    parameters = {
+    "pk": "4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb",
+    }
+    query_filter = "PartitionKey eq @pk"
+    entities = table_client.query_entities(query_filter, parameters=parameters)
+
+    # return str(entities.next().get("Elo"))
+
+    # Define Plot Data
+    labels = [] 
+    data = []
+    
+    for entity in entities:
+        date_time = entity.get("RowKey")
+        date_time = datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%SZ') # Convert string TimeStamp to Date Time
+        date_time = date_time.replace(tzinfo=tz.UTC) # Assign UTC to Date Time
+        date_time = date_time.astimezone(tz.gettz("Europe/Warsaw")) # Convert from UTC to "Europe/Warsaw"
+        date_time = date_time.strftime("%Y/%m/%d, %H:%M:%S") # Convert Date Time to string as Chart.js is going back to UTC
+
+        data.append(entity.get("Elo")) #Append Elo to data set
+        labels.append(date_time) # Append date_time to X axis for graph
+ 
+    # Return the components to the HTML template
+    return render_template(
+        template_name_or_list='graph.html',
+        data=data,
+        labels=labels,
+    )
 
 
 def getPlayerTeam(match, player):

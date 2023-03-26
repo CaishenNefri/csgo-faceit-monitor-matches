@@ -63,11 +63,12 @@
   - Done: Azure Function get INFO who is playing - for whome we get webhook
   - Done: Save to table info about ELO points
   - Display/Plot graph on main page
-    - Push dump data to table (10 matches - elo changes)
+    - Not needed as Mejz is gamer: Push dump data to table (10 matches - elo changes)
     - Read from storage table
     - Plot graph for one player
     - Plot for each player
     - Switch to real data
+  - Create LOCK to not delete Storage Account / terraform disable destroying
   - Azure Function Webhook Subsription provide security header and query string
   - Move token from _init_.py outside code
   - Disaply last 10 matches
@@ -122,8 +123,8 @@ $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
 # Python APP - website
 Install reqiriments:
 `pip install -r requirements.txt`
-Run Python Flask server:  
-`flask --app hello.py run`+
+Run Python Flask server (debug to restart server on each code change):  
+`flask --app hello.py run --debug`+
 
 # Setup
 ## Manual steps
