@@ -171,11 +171,19 @@ resource "azurerm_storage_account" "storage" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azurerm_storage_table" "players" {
   name                 = "players"
   storage_account_name = azurerm_storage_account.storage.name
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 
