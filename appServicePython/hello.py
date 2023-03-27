@@ -9,6 +9,17 @@ from dateutil import tz #To use CET instead UTC
 from azure.identity import DefaultAzureCredential
 from azure.data.tables import TableServiceClient
 
+players = {
+    "mejz"    : '4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb',
+    "lewy"    : '78491fee-bcdb-46d2-b9df-cae69862e01c',
+    "neo"     : '00c0c7ae-3e57-45d3-82c2-c167fd45fdaf',
+    "kapa"    : '993fa04b-8e3b-4964-b9f0-32ca1584e699',
+    "hajsen"  : '14cadb67-6c68-4896-99d3-e3f8a5d509b1',
+    "caishen" : '5ba2c07d-072c-4db9-a08d-be94f905899c',
+    "fanatyk" : 'dde67c08-df21-4f65-a7b6-46e4ad550f25',
+    "kobze"   : '3e2857f6-3a7e-443f-99b7-0bcd1a5114a6'
+}
+
 myapp = Flask(__name__)
 
 player_mejz_id = "4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb"
@@ -51,35 +62,37 @@ def plot_graph():
         credential=credential)
 
     table_client = table_service_client.get_table_client(table_name="players")
-    # got_entity = table_client.get_entity(partition_key="4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb", row_key="2023-03-25T18:04:13Z")
 
-    parameters = {
-    "pk": "4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb",
-    }
-    query_filter = "PartitionKey eq @pk"
-    entities = table_client.query_entities(query_filter, parameters=parameters)
+    plot_data = {}
+    for name, id in players.items():
+        print(name)
+        print(id)
+        parameters = {
+            "pk": id,
+        }    
+        query_filter = "PartitionKey eq @pk"
+        entities = table_client.query_entities(query_filter, parameters=parameters)
 
-    # return str(entities.next().get("Elo"))
+        # Fulfill python dictionary
+        plot_data[name] =  {}
+        plot_data[name]["data"] = []
+        plot_data[name]["labels"] = []
 
-    # Define Plot Data
-    labels = [] 
-    data = []
-    
-    for entity in entities:
-        date_time = entity.get("RowKey")
-        date_time = datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%SZ') # Convert string TimeStamp to Date Time
-        date_time = date_time.replace(tzinfo=tz.UTC) # Assign UTC to Date Time
-        date_time = date_time.astimezone(tz.gettz("Europe/Warsaw")) # Convert from UTC to "Europe/Warsaw"
-        date_time = date_time.strftime("%Y/%m/%d %H:%M") # Convert Date Time to string as Chart.js is going back to UTC
+        for entity in entities:
+            date_time = entity.get("RowKey")
+            date_time = datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%SZ') # Convert string TimeStamp to Date Time
+            date_time = date_time.replace(tzinfo=tz.UTC) # Assign UTC to Date Time
+            date_time = date_time.astimezone(tz.gettz("Europe/Warsaw")) # Convert from UTC to "Europe/Warsaw"
+            date_time = date_time.strftime("%Y/%m/%d %H:%M") # Convert Date Time to string as Chart.js is going back to UTC
 
-        data.append(entity.get("Elo")) #Append Elo to data set
-        labels.append(date_time) # Append date_time to X axis for graph
+            plot_data[name]["data"].append(entity.get("Elo")) #Append Elo to data set
+            plot_data[name]["labels"].append(date_time) # Append date_time to X axis for graph
+   
  
     # Return the components to the HTML template
     return render_template(
         template_name_or_list='graph.html',
-        data=data,
-        labels=labels,
+        plot_data=plot_data,
     )
 
 
