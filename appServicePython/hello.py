@@ -10,14 +10,15 @@ from azure.identity import DefaultAzureCredential
 from azure.data.tables import TableServiceClient
 
 players = {
-    "mejz"    : '4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb',
+    "mez"     : '4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb',
     "lewy"    : '78491fee-bcdb-46d2-b9df-cae69862e01c',
     "neo"     : '00c0c7ae-3e57-45d3-82c2-c167fd45fdaf',
     "kapa"    : '993fa04b-8e3b-4964-b9f0-32ca1584e699',
     "hajsen"  : '14cadb67-6c68-4896-99d3-e3f8a5d509b1',
     "caishen" : '5ba2c07d-072c-4db9-a08d-be94f905899c',
     "fanatyk" : 'dde67c08-df21-4f65-a7b6-46e4ad550f25',
-    "kobze"   : '3e2857f6-3a7e-443f-99b7-0bcd1a5114a6'
+    "kobze"   : '3e2857f6-3a7e-443f-99b7-0bcd1a5114a6',
+    "hrd"     : '30536f2c-ae65-4403-9d3e-64c01724a6ff'
 }
 
 myapp = Flask(__name__)
