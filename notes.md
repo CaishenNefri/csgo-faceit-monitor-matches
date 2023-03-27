@@ -65,7 +65,7 @@
   - Display/Plot graph on main page
     - Not needed as Mejz is gamer: Push dump data to table (10 matches - elo changes)
     - Done: Read from storage table
-    - Plot graph for one player: https://www.chartjs.org/docs/latest/general/data-structures.html
+    - Done: Plot graph for one player: https://www.chartjs.org/docs/latest/general/data-structures.html
     - Plot for each player
     - Switch to real data
   - Done: Create LOCK to not delete Storage Account / terraform disable destroying
