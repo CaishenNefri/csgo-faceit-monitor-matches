@@ -62,13 +62,15 @@
   - Done: Azure Function to update table when match finishend
   - Done: Azure Function get INFO who is playing - for whome we get webhook
   - Done: Save to table info about ELO points
-  - Display/Plot graph on main page
+  - Done: Display/Plot graph on main page
     - Not needed as Mejz is gamer: Push dump data to table (10 matches - elo changes)
     - Done: Read from storage table
     - Done: Plot graph for one player: https://www.chartjs.org/docs/latest/general/data-structures.html
-    - Plot for each player
-    - Switch to real data
+    - Done: Plot for each player
   - Done: Create LOCK to not delete Storage Account / terraform disable destroying
+  - Save K/D and other match stats to Storage Account
+  - Add Dais to watcher
+  - Clenup code 
   - Azure Function Webhook Subsription provide security header and query string
   - Move token from _init_.py outside code
   - Disaply last 10 matches
