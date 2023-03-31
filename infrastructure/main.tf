@@ -90,6 +90,16 @@ resource "azurerm_linux_web_app" "webapp" {
       python_version = "3.8"
     }
   }
+
+  app_settings = {
+    AZURE_CLIENT_ID        = azurerm_user_assigned_identity.function_identity.client_id
+    STORAGE_ENDPOINT_TABLE = azurerm_storage_account.storage.primary_table_endpoint
+  }
+
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.function_identity.id]
+  }
 }
 
 ### START Function APP
@@ -166,11 +176,26 @@ resource "azurerm_storage_account" "storage" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "azurerm_management_lock" "storage" {
+  name       = "storage-lock"
+  scope      = azurerm_storage_account.storage.id
+  lock_level = "CanNotDelete"
+  notes      = "Locked because it contains every ELO changefor player"
 }
 
 resource "azurerm_storage_table" "players" {
   name                 = "players"
   storage_account_name = azurerm_storage_account.storage.name
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 

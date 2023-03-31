@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<title>Defacto Faceit Stats</title>
+</head>
+
+<body>
+	<div id="charts" style="height: 50vh; width: 50%;">
+		<!-- canvas with graphs -->
+	</div>
+
+	<script>
+		const plot_data = {{ plot_data | tojson}}; // get values from Python backend
+		const div = document.getElementById('charts'); // get id of main div
+
+		// Loop over each player
+		for (x in plot_data)
+		{
+			// Check if player has any match recorded. If not - skip
+			if (plot_data[x]["labels"].length == 0) {continue;}
+
+			const data = {
+				labels: plot_data[x]["labels"],
+				datasets: [{
+					label: x,
+					backgroundColor: 'rgb(255, 99, 132)',
+					borderColor: 'rgb(255, 99, 132)',
+					data: plot_data[x]["data"],
+				}]
+			};
+
+			const config = {
+				type: 'line',
+				data: data,
+				options: { maintainAspectRatio: false }
+			};
+
+			// create canvas graph for one player
+			var canvas = document.createElement('canvas');
+			const myChart = new Chart(
+				div.appendChild(canvas),
+				config
+			);
+		}
+	</script>
+</body>
+</html>
