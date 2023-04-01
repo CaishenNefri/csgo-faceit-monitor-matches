@@ -21,7 +21,8 @@ playersWatched = [
 '5ba2c07d-072c-4db9-a08d-be94f905899c', #caishen
 'dde67c08-df21-4f65-a7b6-46e4ad550f25', #fanatyk
 '3e2857f6-3a7e-443f-99b7-0bcd1a5114a6', #kobze
-'30536f2c-ae65-4403-9d3e-64c01724a6ff' #'hrd
+'30536f2c-ae65-4403-9d3e-64c01724a6ff', #'hrd
+'cbd5f9a1-6e80-4122-a222-2ec0c8f06261' #DaiSS
 ]
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -106,3 +107,4 @@ def getPlayerElo(playerId):
         )
     toJson = response.json()
     return toJson["games"]["csgo"]["faceit_elo"]
+
