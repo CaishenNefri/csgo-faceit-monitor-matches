@@ -24,6 +24,11 @@ playersWatched = [
 '30536f2c-ae65-4403-9d3e-64c01724a6ff', #'hrd
 'cbd5f9a1-6e80-4122-a222-2ec0c8f06261' #DaiSS
 ]
+# Test players list
+# playersWatched = [
+#     'b45dcc4e-f205-4d50-adc3-f25bf3050632',
+#     'f9f6be9c-a8cf-45e9-800a-ffd1e89f33aa'
+# ]
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -34,10 +39,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
         credential=credential)
 
+
     # Log whole webhook payload
     payload = req.get_json()
-    dump = json.dumps(payload, indent=2)
-    logging.info(f"Login payload body of webhook \n{dump}") 
+    dump    = json.dumps(payload, indent=2)
+    # logging.info(f"Login payload body of webhook \n{dump}") 
 
     ####################################
     #Part for further autorization of webhook request
@@ -64,13 +70,20 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             logging.info(f"PlayerID {playerId}")
             playersPlayed.append(playerId)
 
+    playersPlayedWatched = []
     #Compare who is playing match from payload
     for pPlayed in playersPlayed:
         for pWatched in playersWatched:
             if (pPlayed == pWatched):
                 logging.info(f"Following player played and we watch him: {pPlayed}")
-                elo = getPlayerElo(pWatched)
-                pushToTable(table_service_client, pWatched, timestamp, elo, matchId)
+                playersPlayedWatched.append(pPlayed)
+
+    logging.info(f"Players Played and Watched: {playersPlayedWatched}")    
+    playersStats = getPlayerStatsFromMatch(matchId, playersPlayedWatched)
+
+    for pWatched in playersPlayedWatched:
+        elo = getPlayerElo(pWatched)
+        pushToTable(table_service_client, pWatched, timestamp, elo, matchId, playersStats[pWatched])
 
     return func.HttpResponse(
             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
@@ -78,14 +91,18 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     )
 
 
-def pushToTable(table_service_client, playerId, timestamp, elo, matchId):
-    tableName = "players"
+def pushToTable(table_service_client, playerId, timestamp, elo, matchId, stats):
+    tableName = "players" #prod table
+    # tableName = "playersTest" #test table
     entity = {
         'PartitionKey': playerId,
-        'RowKey': timestamp,
-        'Elo': elo,
-        'MatchId': matchId
+        'RowKey'      : timestamp,
+        'Elo'         : elo,
+        'MatchId'     : matchId
     }
+    for key in stats.keys():
+        entity[key] = stats[key]
+
 
     logging.info(f"Create table {tableName} if not exist")
     table_service_client.create_table_if_not_exists(tableName)
@@ -108,3 +125,46 @@ def getPlayerElo(playerId):
     toJson = response.json()
     return toJson["games"]["csgo"]["faceit_elo"]
 
+def getPlayerStatsFromMatch(matchId: str, playersId : list):
+    # Request match details for specific player
+    response = requests.get(
+        f"https://open.faceit.com/data/v4/matches/{matchId}/stats",
+        #TODO Remove token from code
+        headers={"Authorization":"Bearer ***REMOVED***"}
+        )
+
+    
+    matchStats = response.json() # conver reposne from Faceit to json
+    matchStats = matchStats["rounds"][0]
+    logging.info(f"Dump match stats from faceit response:\n{json.dumps(matchStats, indent=2)}")
+    
+    playersStats = {}
+    matchRounds = int(matchStats["round_stats"]["Rounds"])
+    
+    for playerId in playersId:
+        playerStats  = {} # Python dictinary
+        playerStats["matchMap"] = matchStats["round_stats"]["Map"]
+        # Find specific player details and save to dictionary
+        for team in matchStats["teams"]:
+            playerFound = False
+            for player in team["players"]:
+                if (playerId == player["player_id"]):
+                    playerFound = True
+                    playerS = player["player_stats"]
+                    playerStats["kills"]   = int(playerS["Kills"])
+                    playerStats["deaths"]  = int(playerS["Deaths"])
+                    playerStats["kdRatio"] = playerS["K/D Ratio"]
+                    playerStats["kpr"]     = playerStats["kills"]/matchRounds
+                else:
+                    continue
+
+            # If player founded then save last details and return from function
+            if (playerFound):
+                playerStats["ifWin"]       = team["team_stats"]["Team Win"]
+                finalScore                 = int(team["team_stats"]["Final Score"])
+                playerStats["matchScore"]  = f"{finalScore} / {matchRounds-finalScore}"
+                logging.info(f"Saved details to dictionary \n{playerStats}")
+                playersStats[playerId] = playerStats
+                break
+    
+    return playersStats
