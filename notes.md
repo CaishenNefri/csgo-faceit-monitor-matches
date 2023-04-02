@@ -68,9 +68,10 @@
     - Done: Plot graph for one player: https://www.chartjs.org/docs/latest/general/data-structures.html
     - Done: Plot for each player
   - Done: Create LOCK to not delete Storage Account / terraform disable destroying
-  - Save K/D and other match stats to Storage Account
-  - Add Dais to watcher
-  - Clenup code 
+  - Done: Save K/D and other match stats to Storage Account
+  - Done: Display match stats on graph
+  - Done: Add Dais to watcher
+  - Move Watched Plaers list outside of code
   - Azure Function Webhook Subsription provide security header and query string
   - Move token from _init_.py outside code
   - Disaply last 10 matches
