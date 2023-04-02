@@ -111,6 +111,7 @@ Daiss   : 'cbd5f9a1-6e80-4122-a222-2ec0c8f06261'
 List of watched players is now storeg in storage account in playersWatched table to be easily managed from one place
 
 
+
 # Set env variable
 $env:AZDO_PERSONAL_ACCESS_TOKEN="xxx" # from key vaults
 $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
