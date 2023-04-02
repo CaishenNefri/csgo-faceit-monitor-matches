@@ -71,6 +71,8 @@
   - Done: Save K/D and other match stats to Storage Account
   - Done: Display match stats on graph
   - Done: Add Dais to watcher
+  - Done: Remove Faceit Token from code
+  - Done: Use env env for storage account table endpoint
   - Move Watched Plaers list outside of code
   - Azure Function Webhook Subsription provide security header and query string
   - Move token from _init_.py outside code
@@ -85,6 +87,7 @@
     - condition for Azure WebSite
   - Move Python code to container
   - Tweak deploying to use artifacts
+  - Use containers to run terraform inside Azure DevOps - in ADO there is not the newest version of terraform
 
 
 # Links
