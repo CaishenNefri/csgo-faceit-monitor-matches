@@ -34,7 +34,37 @@
 			const config = {
 				type: 'line',
 				data: data,
-				options: { maintainAspectRatio: false }
+				options: { 
+					maintainAspectRatio: false,
+					plugins: {
+						tooltip: {
+							callbacks: {
+								label: function(context) {
+									return "Elo: " + context.raw
+								},
+								beforeLabel: function(context) {
+									let la = context.dataset.label
+									let kd = plot_data[la]["kdRatio"][context.dataIndex];
+									let map = plot_data[la]["matchMap"][context.dataIndex];
+									let score = plot_data[la]["matchScore"][context.dataIndex];
+									
+									return `KD: ${kd}\nMap: ${map}\nScore: ${score}`
+								},
+								labelTextColor: function(context) {
+									let la = context.dataset.label
+									let ifWin = plot_data[la]["ifWin"][context.dataIndex];
+									if (ifWin == "1") {
+										return "#00FF00"
+									} else if (ifWin == "0") {
+										return "#ff0000"
+									} else {
+										return "#00FFFF"
+									}
+								}
+							}
+						}
+					}
+				}
 			};
 
 			// create canvas graph for one player

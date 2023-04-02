@@ -79,6 +79,10 @@ def plot_graph():
         plot_data[name] =  {}
         plot_data[name]["data"] = []
         plot_data[name]["labels"] = []
+        plot_data[name]["kdRatio"] = []
+        plot_data[name]["matchMap"] = []
+        plot_data[name]["matchScore"] = []
+        plot_data[name]["ifWin"] = []
 
         for entity in entities:
             date_time = entity.get("RowKey")
@@ -89,6 +93,10 @@ def plot_graph():
 
             plot_data[name]["data"].append(entity.get("Elo")) #Append Elo to data set
             plot_data[name]["labels"].append(date_time) # Append date_time to X axis for graph
+            plot_data[name]["kdRatio"].append(entity.get("kdRatio", "-")) ##Append KD to plot_data
+            plot_data[name]["matchMap"].append(entity.get("matchMap", "-")) ##Append Map of Match to plot_data
+            plot_data[name]["matchScore"].append(entity.get("matchScore", "-")) ##Append Final Score of match to plot_data
+            plot_data[name]["ifWin"].append(entity.get("ifWin", "")) ##Append if match Won to plot_data
    
  
     # Return the components to the HTML template
