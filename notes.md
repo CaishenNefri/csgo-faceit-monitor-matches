@@ -107,7 +107,7 @@ Daiss   : 'cbd5f9a1-6e80-4122-a222-2ec0c8f06261'
 
 
 # Set env variable
-$env:AZDO_PERSONAL_ACCESS_TOKEN="***REMOVED***"
+$env:AZDO_PERSONAL_ACCESS_TOKEN="xxx" # from key vaults
 $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
 
 
@@ -143,6 +143,7 @@ terraform apply -auto-approve
 # Setup
 ## Manual steps
 - Grant Terraform Service Principal permission to grant privileges 
+- Puth to KeyVailt devops-token | faceitToken
 
 # Azure Function - grap webhooks from Faceit
 Faceit Dev can send webhook data when it's subscribed: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3/webhooks
