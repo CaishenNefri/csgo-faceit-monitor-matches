@@ -59,6 +59,7 @@ stages:
       - bash: terraform -chdir=$(infraDir) apply -auto-approve
         displayName: 'terraform: apply'
         env:
+          TF_VAR_devops_token: $(TF_VAR_devops_token)
           ARM_SUBSCRIPTION_ID: $(kv-arm-subscription-id)
           ARM_CLIENT_ID:       $(kv-arm-client-id)
           ARM_CLIENT_SECRET:   $(kv-arm-client-secret)

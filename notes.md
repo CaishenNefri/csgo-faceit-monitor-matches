@@ -93,13 +93,6 @@
 
 
 # DATA
-- API Key:
-    - >***REMOVED***
-<!-- - 1-5c99a93b-8caa-44fd-9def-d407f8737676
-- a0b4a0e5-f633-47f1-ae4b-a9b6cd0a8399 -->
-- Mejz id - player_id:
-    - >4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb
-
 ## Players IDs
 mejz    : '4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb',
 lewy    : '78491fee-bcdb-46d2-b9df-cae69862e01c',
@@ -129,10 +122,23 @@ $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
   - Mitigated: by removing all infra and recreate them with depends_on 
 
 # Python APP - website
+To be able to run locally App Service we need to run following commands in sequence
 Install reqiriments:
 `pip install -r requirements.txt`
+Use local env app settings = get values from KeyVault to not have them saved in code repository
+```Powershell
+Connect-AzAccount
+$Env:STORAGE_ENDPOINT_TABLE = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'STORAGE-ENDPOINT-TABLE' -AsPlainText
+$Env:FACEIT_TOKEN           = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'faceitToken' -AsPlainText
+```
 Run Python Flask server (debug to restart server on each code change):  
-`flask --app hello.py run --debug`+
+`flask --app hello.py run --debug`
+
+# Terraform Setup
+```Powershell
+$Env:TF_VAR_devops_token = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'devops-token' -AsPlainText
+terraform apply -auto-approve
+```
 
 # Setup
 ## Manual steps

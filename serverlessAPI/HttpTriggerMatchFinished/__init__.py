@@ -30,6 +30,8 @@ playersWatched = [
 #     'f9f6be9c-a8cf-45e9-800a-ffd1e89f33aa'
 # ]
 
+faceitTokenHeader = {"Authorization":f"Bearer {os.environ['FACEIT_TOKEN']}"} #Token to authorize to Faceit API
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
@@ -92,8 +94,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
 
 def pushToTable(table_service_client, playerId, timestamp, elo, matchId, stats):
-    tableName = "players" #prod table
-    # tableName = "playersTest" #test table
+    # tableName = "players" #prod table 
+    tableName = "playersTest" #test table
     entity = {
         'PartitionKey': playerId,
         'RowKey'      : timestamp,
@@ -120,7 +122,7 @@ def getPlayerElo(playerId):
     response = requests.get(
             f"https://open.faceit.com/data/v4/players/{playerId}",
             #TODO Remove token from code
-            headers={"Authorization":"Bearer ***REMOVED***"}
+            headers=faceitTokenHeader
         )
     toJson = response.json()
     return toJson["games"]["csgo"]["faceit_elo"]
@@ -130,7 +132,7 @@ def getPlayerStatsFromMatch(matchId: str, playersId : list):
     response = requests.get(
         f"https://open.faceit.com/data/v4/matches/{matchId}/stats",
         #TODO Remove token from code
-        headers={"Authorization":"Bearer ***REMOVED***"}
+        headers=faceitTokenHeader
         )
 
     

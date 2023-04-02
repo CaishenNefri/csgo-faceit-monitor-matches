@@ -26,7 +26,7 @@ provider "azurerm" {
 
 provider "azuredevops" {
   org_service_url       = "https://dev.azure.com/Caishen"
-  personal_access_token = "***REMOVED***"
+  personal_access_token = var.devops_token
 }
 
 data "azuredevops_project" "p" {
@@ -94,7 +94,10 @@ resource "azurerm_linux_web_app" "webapp" {
   app_settings = {
     AZURE_CLIENT_ID        = azurerm_user_assigned_identity.function_identity.client_id
     STORAGE_ENDPOINT_TABLE = azurerm_storage_account.storage.primary_table_endpoint
+    FACEIT_TOKEN           = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault.kv.vault_uri}secrets/faceitToken/)"
   }
+
+  key_vault_reference_identity_id = azurerm_user_assigned_identity.function_identity.id
 
   identity {
     type         = "UserAssigned"
@@ -120,6 +123,8 @@ resource "azurerm_linux_function_app" "functionapp" {
   storage_account_access_key = azurerm_storage_account.storage.secondary_access_key
   service_plan_id            = azurerm_service_plan.functionplan.id
 
+  key_vault_reference_identity_id = azurerm_user_assigned_identity.function_identity.id
+
   site_config {
     application_stack {
       python_version = "3.9"
@@ -131,8 +136,8 @@ resource "azurerm_linux_function_app" "functionapp" {
     AZURE_CLIENT_ID                 = azurerm_user_assigned_identity.function_identity.client_id
     STORAGE_ENDPOINT_TABLE          = azurerm_storage_account.storage.primary_table_endpoint
     WEBSITE_ENABLE_SYNC_UPDATE_SITE = false
+    FACEIT_TOKEN                    = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault.kv.vault_uri}secrets/faceitToken/)"
   }
-
 
   identity {
     type         = "UserAssigned"
@@ -196,6 +201,36 @@ resource "azurerm_storage_table" "players" {
   lifecycle {
     prevent_destroy = true
   }
+}
+
+# To get current tenand_id
+data "azurerm_client_config" "current" {}
+
+resource "azurerm_key_vault" "kv" {
+  name                        = "kv${random_integer.ri.result}"
+  location                    = azurerm_resource_group.rg.location
+  resource_group_name         = azurerm_resource_group.rg.name
+  enabled_for_disk_encryption = true
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  purge_protection_enabled    = false
+
+  sku_name = "standard"
+}
+
+resource "azurerm_key_vault_access_policy" "uai" {
+  key_vault_id = azurerm_key_vault.kv.id
+  tenant_id    = azurerm_user_assigned_identity.function_identity.tenant_id
+  object_id    = azurerm_user_assigned_identity.function_identity.principal_id
+
+  secret_permissions = [
+    "Get",
+  ]
+}
+
+resource "azurerm_key_vault_secret" "storage_endpoint_table" {
+  name         = "STORAGE-ENDPOINT-TABLE"
+  value        = azurerm_storage_account.storage.primary_table_endpoint
+  key_vault_id = azurerm_key_vault.kv.id
 }
 
 

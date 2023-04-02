@@ -1,4 +1,5 @@
 import requests
+import os
 from flask import Flask, render_template
 import json
 from datetime import datetime #To convert TimeStamp
@@ -22,6 +23,9 @@ players = {
     'DaiSS'   : 'cbd5f9a1-6e80-4122-a222-2ec0c8f06261'
 }
 
+faceitTokenHeader = {"Authorization":f"Bearer {os.environ['FACEIT_TOKEN']}"} #Token to authorize to Faceit API
+
+
 myapp = Flask(__name__)
 
 player_mejz_id = "4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb"
@@ -32,11 +36,10 @@ def hello():
 
 @myapp.route("/mejz", methods=['GET', 'POST'])
 def parse_request():
-    f = open('mejz_matches.json')
-    response = json.load(f)
-    # response = getPlayerMatches(player_mejz_id) # function to get player matches from API
-    match = response["items"][0]
-    timeMatch =  getMatchTimeFinish(match)
+    f           = open('mejz_matches.json')
+    response    = json.load(f)
+    match       = response["items"][0]
+    timeMatch   = getMatchTimeFinish(match)
     print(timeMatch)
     return "OK"
 
@@ -45,22 +48,22 @@ def list_maches():
     response = getPlayerMatches(player_mejz_id, limit = 10) # function to get player matches from API
     summary = ""
     for match in response["items"]:
-        team = getPlayerTeam(match, player_mejz_id)
-        matchStats = getMatchStats(match)
-        matchMap = getMatchMap(matchStats)
-        matchScore = getMatchScore(matchStats)
-        ifWon = ifTeamWon(match, team)    
-        timeMatchFinished = getMatchTimeFinish(match)
-        match_summary = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon} | Finished at: {timeMatchFinished}"
+        team                = getPlayerTeam(match, player_mejz_id)
+        matchStats          = getMatchStats(match)
+        matchMap            = getMatchMap(matchStats)
+        matchScore          = getMatchScore(matchStats)
+        ifWon               = ifTeamWon(match, team)    
+        timeMatchFinished   = getMatchTimeFinish(match)
+        match_summary       = f"Map: {matchMap} | Score: {matchScore} | Win: {ifWon} | Finished at: {timeMatchFinished}"
         print(match_summary)
-        summary = summary + "<br/>" + match_summary
+        summary             = summary + "<br/>" + match_summary
     return summary
 
 @myapp.route("/graph", methods=['GET', 'POST'])
 def plot_graph():
     credential = DefaultAzureCredential()
     table_service_client = TableServiceClient(
-        endpoint="https://storage69415.table.core.windows.net/",
+        endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
         credential=credential)
 
     table_client = table_service_client.get_table_client(table_name="players")
@@ -73,7 +76,7 @@ def plot_graph():
             "pk": id,
         }    
         query_filter = "PartitionKey eq @pk"
-        entities = table_client.query_entities(query_filter, parameters=parameters)
+        entities     = table_client.query_entities(query_filter, parameters=parameters)
 
         # Fulfill python dictionary
         plot_data[name] =  {}
@@ -127,7 +130,7 @@ def ifTeamWon(match, team):
 def getPlayerMatches(player, offset = 0, limit = 10):
     response = requests.get(
             f"https://open.faceit.com/data/v4/players/{player}/history?game=csgo&offset={offset}&limit={limit}",
-            headers={"Authorization":"Bearer ***REMOVED***"}
+            headers=faceitTokenHeader
         )
     print("test")
     print(response.json())
@@ -143,14 +146,14 @@ def getMatchStats(match):
     match_id = match["match_id"]
     response = requests.get(
         f"https://open.faceit.com/data/v4/matches/{match_id}/stats",
-            headers={"Authorization":"Bearer ***REMOVED***"}
+            headers=faceitTokenHeader
     )
     return response.json()
 
 def getPlayerElo(player):
     response = requests.get(
             f"https://open.faceit.com/data/v4/players/{player}",
-            headers={"Authorization":"Bearer ***REMOVED***"}
+            headers=faceitTokenHeader
         )
     toJson = response.json()
     return toJson["games"]["csgo"]["faceit_elo"]
