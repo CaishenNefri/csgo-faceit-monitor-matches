@@ -95,6 +95,7 @@ resource "azurerm_linux_web_app" "webapp" {
     AZURE_CLIENT_ID        = azurerm_user_assigned_identity.function_identity.client_id
     STORAGE_ENDPOINT_TABLE = azurerm_storage_account.storage.primary_table_endpoint
     FACEIT_TOKEN           = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault.kv.vault_uri}secrets/faceitToken/)"
+    STORAGE_TABLE_PLAYERS  = "players" #Place where to saved elo
   }
 
   key_vault_reference_identity_id = azurerm_user_assigned_identity.function_identity.id
@@ -137,6 +138,7 @@ resource "azurerm_linux_function_app" "functionapp" {
     STORAGE_ENDPOINT_TABLE          = azurerm_storage_account.storage.primary_table_endpoint
     WEBSITE_ENABLE_SYNC_UPDATE_SITE = false
     FACEIT_TOKEN                    = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault.kv.vault_uri}secrets/faceitToken/)"
+    STORAGE_TABLE_PLAYERS           = "players" #Place where to saved elo
   }
 
   identity {

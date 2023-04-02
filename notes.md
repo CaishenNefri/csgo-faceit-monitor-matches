@@ -72,7 +72,7 @@
   - Done: Display match stats on graph
   - Done: Add Dais to watcher
   - Done: Remove Faceit Token from code
-  - Done: Use env env for storage account table endpoint
+  - Done:  Use env env for storage account table endpoint
   - Move Watched Plaers list outside of code
   - Azure Function Webhook Subsription provide security header and query string
   - Move token from _init_.py outside code
@@ -108,6 +108,8 @@ kobze   : '3e2857f6-3a7e-443f-99b7-0bcd1a5114a6',
 hrd     : '30536f2c-ae65-4403-9d3e-64c01724a6ff',
 Daiss   : 'cbd5f9a1-6e80-4122-a222-2ec0c8f06261'
 
+List of watched players is now storeg in storage account in playersWatched table to be easily managed from one place
+
 
 # Set env variable
 $env:AZDO_PERSONAL_ACCESS_TOKEN="xxx" # from key vaults
@@ -133,6 +135,7 @@ Use local env app settings = get values from KeyVault to not have them saved in 
 Connect-AzAccount
 $Env:STORAGE_ENDPOINT_TABLE = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'STORAGE-ENDPOINT-TABLE' -AsPlainText
 $Env:FACEIT_TOKEN           = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'faceitToken' -AsPlainText
+$Env:STORAGE_TABLE_PLAYERS = "playersTest"
 ```
 Run Python Flask server (debug to restart server on each code change):  
 `flask --app hello.py run --debug`

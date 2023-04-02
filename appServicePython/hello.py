@@ -10,19 +10,6 @@ from dateutil import tz #To use CET instead UTC
 from azure.identity import DefaultAzureCredential
 from azure.data.tables import TableServiceClient
 
-players = {
-    "mez"     : '4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb',
-    "lewy"    : '78491fee-bcdb-46d2-b9df-cae69862e01c',
-    "neo"     : '00c0c7ae-3e57-45d3-82c2-c167fd45fdaf',
-    "kapa"    : '993fa04b-8e3b-4964-b9f0-32ca1584e699',
-    "hajsen"  : '14cadb67-6c68-4896-99d3-e3f8a5d509b1',
-    "caishen" : '5ba2c07d-072c-4db9-a08d-be94f905899c',
-    "fanatyk" : 'dde67c08-df21-4f65-a7b6-46e4ad550f25',
-    "kobze"   : '3e2857f6-3a7e-443f-99b7-0bcd1a5114a6',
-    "hrd"     : '30536f2c-ae65-4403-9d3e-64c01724a6ff',
-    'DaiSS'   : 'cbd5f9a1-6e80-4122-a222-2ec0c8f06261'
-}
-
 faceitTokenHeader = {"Authorization":f"Bearer {os.environ['FACEIT_TOKEN']}"} #Token to authorize to Faceit API
 
 
@@ -61,6 +48,8 @@ def list_maches():
 
 @myapp.route("/graph", methods=['GET', 'POST'])
 def plot_graph():
+    players = getDictionaryOfWatchedPlayers() #Get list of watched players from Azure Storage Account Table
+
     credential = DefaultAzureCredential()
     table_service_client = TableServiceClient(
         endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
@@ -163,3 +152,20 @@ def getMatchTimeFinish(match):
     date_time = datetime.fromtimestamp(timeStamp, tz=tz.gettz("Europe/Warsaw")) # convert timestamp to to datetime object and switch to "Europe/Warsaw" timezone
     date_time = date_time.strftime("%m/%d/%Y, %H:%M:%S") # convert datiem to human read string
     return date_time
+
+def getDictionaryOfWatchedPlayers():
+    # Get to storage account
+    credential = DefaultAzureCredential()
+    table_service_client = TableServiceClient(
+        endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
+        credential=credential)
+
+    # Get Storage Account table    
+    table_client = table_service_client.get_table_client(table_name="playersWatched")
+    entities     = table_client.list_entities() #List all entities from table
+
+    playersList = {} #Prepare dictionary to save players
+    for entity in entities:
+        playersList[entity["RowKey"]] = entity["PartitionKey"] #Save in proper format to dictionary
+ 
+    return playersList

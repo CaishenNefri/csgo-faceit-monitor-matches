@@ -11,29 +11,12 @@ import azure.functions as func
 from azure.identity import DefaultAzureCredential
 from azure.data.tables import TableServiceClient
 
-## Players IDs to see who played match
-playersWatched = [
-'4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb', #mejz   
-'78491fee-bcdb-46d2-b9df-cae69862e01c', #lewy   
-'00c0c7ae-3e57-45d3-82c2-c167fd45fdaf', #neo    
-'993fa04b-8e3b-4964-b9f0-32ca1584e699', #kapa   
-'14cadb67-6c68-4896-99d3-e3f8a5d509b1', #hajsen 
-'5ba2c07d-072c-4db9-a08d-be94f905899c', #caishen
-'dde67c08-df21-4f65-a7b6-46e4ad550f25', #fanatyk
-'3e2857f6-3a7e-443f-99b7-0bcd1a5114a6', #kobze
-'30536f2c-ae65-4403-9d3e-64c01724a6ff', #'hrd
-'cbd5f9a1-6e80-4122-a222-2ec0c8f06261' #DaiSS
-]
-# Test players list
-# playersWatched = [
-#     'b45dcc4e-f205-4d50-adc3-f25bf3050632',
-#     'f9f6be9c-a8cf-45e9-800a-ffd1e89f33aa'
-# ]
-
 faceitTokenHeader = {"Authorization":f"Bearer {os.environ['FACEIT_TOKEN']}"} #Token to authorize to Faceit API
+playersTable = os.environ["STORAGE_TABLE_PLAYERS"]
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
+    playersWatched = getDictionaryOfWatchedPlayers()
 
     # Acquire a credential object to be able to insert to Storage Account
     credential = DefaultAzureCredential()
@@ -94,8 +77,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
 
 def pushToTable(table_service_client, playerId, timestamp, elo, matchId, stats):
-    # tableName = "players" #prod table 
-    tableName = "playersTest" #test table
+    tableName = playersTable #table 
     entity = {
         'PartitionKey': playerId,
         'RowKey'      : timestamp,
@@ -170,3 +152,20 @@ def getPlayerStatsFromMatch(matchId: str, playersId : list):
                 break
     
     return playersStats
+
+def getDictionaryOfWatchedPlayers():
+    # Get to storage account
+    credential = DefaultAzureCredential()
+    table_service_client = TableServiceClient(
+        endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
+        credential=credential)
+
+    # Get Storage Account table    
+    table_client = table_service_client.get_table_client(table_name="playersWatched")
+    entities     = table_client.list_entities() #List all entities from table
+
+    playersList = [] #Prepare list to save players
+    for entity in entities:
+        playersList.append(entity["PartitionKey"]) #Save in proper format to list
+ 
+    return playersList
