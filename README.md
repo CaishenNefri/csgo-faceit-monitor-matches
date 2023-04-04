@@ -11,3 +11,4 @@ Whole Infrastructure is mainained via Terraform
 
 ## Web Application
 WebApp is write on Python on Flask
+![flow](https://user-images.githubusercontent.com/24476768/229914793-c191da62-42fd-4580-a702-caefc77dbd6d.png)
