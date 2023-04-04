@@ -76,13 +76,13 @@
   - Done: Move Watched Plaers list outside of code
   - Done: Move token from _init_.py outside code
   - Azure Function Webhook Subsription provide security header and query string
-  - Rotate secrets
+  - Done: Rotate secrets
     - DevOps token
     - Service Principal Terraform: Caishen-csgo-faceit-monitor-matches-1564f82f-9f08-47e0-9939-5e3dcc739b5e 
     - FaceitToken
     - Remove sensitive data form GitHub repository
       - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
-    - Rotate 
+    - Rotated faceit, devops and sp tokens
   - Publish GitHub Repository
   - Prepare ReadMe
     - Diagram
