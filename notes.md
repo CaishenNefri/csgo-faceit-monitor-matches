@@ -73,10 +73,22 @@
   - Done: Add Dais to watcher
   - Done: Remove Faceit Token from code
   - Done:  Use env env for storage account table endpoint
-  - Move Watched Plaers list outside of code
+  - Done: Move Watched Plaers list outside of code
+  - Done: Move token from _init_.py outside code
   - Azure Function Webhook Subsription provide security header and query string
-  - Move token from _init_.py outside code
-  - Disaply last 10 matches
+  - Rotate secrets
+    - DevOps token
+    - Service Principal Terraform: Caishen-csgo-faceit-monitor-matches-1564f82f-9f08-47e0-9939-5e3dcc739b5e 
+    - FaceitToken
+    - Remove sensitive data form GitHub repository
+      - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+    - Rotate 
+  - Publish GitHub Repository
+  - Prepare ReadMe
+    - Diagram
+    - How it works
+    - Screenshots
+  - Analyze how to use custom domain in Web Service
   - Set triggers
     - https://pumpingco.de/blog/run-an-azure-pipelines-job-only-if-source-code-has-changed/
     - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops
@@ -108,7 +120,7 @@ kobze   : '3e2857f6-3a7e-443f-99b7-0bcd1a5114a6',
 hrd     : '30536f2c-ae65-4403-9d3e-64c01724a6ff',
 Daiss   : 'cbd5f9a1-6e80-4122-a222-2ec0c8f06261'
 
-List of watched players is now storeg in storage account in playersWatched table to be easily managed from one place
+List of watched players is now store in storage account in playersWatched table to be easily managed from one place
 
 
 
