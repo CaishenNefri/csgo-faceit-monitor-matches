@@ -83,13 +83,17 @@
     - Remove sensitive data form GitHub repository
       - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
     - Rotated faceit, devops and sp tokens
-  - Publish GitHub Repository
+  - Done: Publish GitHub Repository
   - Prepare ReadMe
     - Diagram
     - How it works
     - Screenshots
-  - Analyze how to use custom domain in Web Service
-  - Set triggers
+  - Done: Analyze how to use custom domain in Web Service
+  - Done: Use Custom Domain
+    - buy domain
+    - create subdomain
+    - create certificate
+  - Set triggers in DevOps pipeline
     - https://pumpingco.de/blog/run-an-azure-pipelines-job-only-if-source-code-has-changed/
     - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops
     - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops&tabs=schema
