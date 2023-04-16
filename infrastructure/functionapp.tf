@@ -1,13 +1,5 @@
 
 ### START Function APP
-resource "azurerm_service_plan" "functionplan" {
-  name                = "service-plan-app-${random_integer.ri.result}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  os_type             = "Linux"
-  sku_name            = "Y1"
-}
-
 resource "azurerm_linux_function_app" "functionapp" {
   name                = "function-app-${random_integer.ri.result}"
   resource_group_name = azurerm_resource_group.rg.name
@@ -15,7 +7,7 @@ resource "azurerm_linux_function_app" "functionapp" {
 
   storage_account_name       = azurerm_storage_account.storage.name
   storage_account_access_key = azurerm_storage_account.storage.secondary_access_key
-  service_plan_id            = azurerm_service_plan.functionplan.id
+  service_plan_id            = azurerm_service_plan.serviceplan.id
 
   key_vault_reference_identity_id = azurerm_user_assigned_identity.function_identity.id
 

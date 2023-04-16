@@ -1,19 +1,3 @@
-resource "azurerm_service_plan" "serviceplan" {
-  name                = "service-plan-${random_integer.ri.result}"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  os_type             = "Linux"
-  sku_name            = "B1"
-
-  depends_on = [
-    azurerm_service_plan.functionplan
-    /* The reason why Service Plan depends on Function Service Plan:
-      https://www.garyjackson.dev/posts/azure-function-app-conflicting-plans/
-      Shortcut: can not be created before due some internal Azure Error
-    */
-  ]
-}
-
 resource "azurerm_linux_web_app" "webapp" {
   name                = "webapp-${random_integer.ri.result}"
   location            = azurerm_resource_group.rg.location
