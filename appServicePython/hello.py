@@ -17,7 +17,7 @@ myapp = Flask(__name__)
 
 player_mejz_id = "4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb"
 
-@myapp.route("/")
+@myapp.route("/dateUpdate")
 def hello():
     return "Hello Flask, on Azure App Service for Linux - 04 September 2022 check"
 
@@ -46,6 +46,7 @@ def list_maches():
         summary             = summary + "<br/>" + match_summary
     return summary
 
+@myapp.route("/", methods=['GET', 'POST'])
 @myapp.route("/graph", methods=['GET', 'POST'])
 def plot_graph():
     players = getDictionaryOfWatchedPlayers() #Get list of watched players from Azure Storage Account Table
