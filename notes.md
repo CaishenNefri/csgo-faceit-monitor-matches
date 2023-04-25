@@ -93,6 +93,22 @@
     - buy domain
     - create subdomain
     - create certificate
+  - SMS Notification
+    - Read: Azure Communication Services => only available for paied subscriptions
+    - Create Queune for pushing notifications
+    - Push notification to queue via Powershell/Curl/Python
+    - Read queue Python
+    - Activate Sim Card
+    - Use USB Modem/Bring other modem
+    - Send simple sms via modem
+    - Send SMS via Python
+    - Table with numbers
+    - Table to check who should be "szkalowany"
+    - Update Function to send to queue 
+    - Create Python App and Docker Container
+    - Install Rasperry 
+    - Ansible script to download and use docker image with our app
+    - Put Raspberry to the wardrobe
   - Set triggers in DevOps pipeline
     - https://pumpingco.de/blog/run-an-azure-pipelines-job-only-if-source-code-has-changed/
     - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops
