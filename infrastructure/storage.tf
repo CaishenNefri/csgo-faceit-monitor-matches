@@ -27,3 +27,9 @@ resource "azurerm_storage_table" "players" {
     prevent_destroy = true
   }
 }
+
+#Queue for pushing notification to be send as SMS
+resource "azurerm_storage_queue" "smsNotification" {
+  name                 = "smsnotification"
+  storage_account_name = azurerm_storage_account.storage.name
+}

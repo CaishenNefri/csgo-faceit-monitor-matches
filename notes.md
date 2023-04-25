@@ -94,8 +94,8 @@
     - create subdomain
     - create certificate
   - SMS Notification
-    - Read: Azure Communication Services => only available for paied subscriptions
-    - Create Queune for pushing notifications
+    - Done: Read Azure Communication Services => only available for paied subscriptions
+    - Done: Create Queune for pushing notifications
     - Push notification to queue via Powershell/Curl/Python
     - Read queue Python
     - Activate Sim Card
