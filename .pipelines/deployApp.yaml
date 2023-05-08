@@ -56,7 +56,7 @@ stages:
           ARM_TENANT_ID:       $(kv-arm-tenant-id)
       - bash: terraform -chdir=$(infraDir) validate
         displayName: 'terraform: validate'
-      - bash: terraform -chdir=$(infraDir) apply -auto-approve
+      - bash: terraform -chdir=$(infraDir) apply -auto-approve -refresh=false
         displayName: 'terraform: apply'
         env:
           TF_VAR_devops_token: $(TF_VAR_devops_token)

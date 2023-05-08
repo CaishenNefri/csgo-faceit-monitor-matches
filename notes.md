@@ -123,7 +123,7 @@
   - Create schedulled Azure function to calculate average ELO per year, month, week, day
   - Tweak deploying to use artifacts
   - Use containers to run terraform inside Azure DevOps - in ADO there is not the newest version of terraform
-  - Use refresh=false at terraform apply stage -> will increase speed but could be harmfull (not yuet tested)
+  - Done: Use refresh=false at terraform apply stage -> will increase speed but could be harmfull (not yuet tested)
 
 
 # Links
@@ -191,6 +191,7 @@ $Env:STORAGE_ENDPOINT_QUEUE = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'S
 $Env:AZURE_TENANT_ID        = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-tenant-id' -AsPlainText
 $Env:AZURE_CLIENT_ID        = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-app-id' -AsPlainText
 $Env:AZURE_CLIENT_SECRET    = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-pw' -AsPlainText
+$Env:QUEUE_NAME             = "smsnotificationtest"
 ```
 
 # Setup
