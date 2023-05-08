@@ -123,6 +123,7 @@
   - Create schedulled Azure function to calculate average ELO per year, month, week, day
   - Tweak deploying to use artifacts
   - Use containers to run terraform inside Azure DevOps - in ADO there is not the newest version of terraform
+  - Use refresh=false at terraform apply stage -> will increase speed but could be harmfull (not yuet tested)
 
 
 # Links
