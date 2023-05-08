@@ -187,8 +187,9 @@ terraform apply -auto-approve
 ```Powershell
 Connect-AzAccount
 $Env:STORAGE_ENDPOINT_QUEUE = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'STORAGE-ENDPOINT-QUEUE' -AsPlainText
-$Env:SP_OBJECT_ID           = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-object-id' -AsPlainText
-$Env:SP_PW                  = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-pw' -AsPlainText
+$Env:AZURE_TENANT_ID        = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-tenant-id' -AsPlainText
+$Env:AZURE_CLIENT_ID        = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-app-id' -AsPlainText
+$Env:AZURE_CLIENT_SECRET    = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-pw' -AsPlainText
 ```
 
 # Setup
