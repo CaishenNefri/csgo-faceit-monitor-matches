@@ -196,6 +196,7 @@ $Env:SP_PW                  = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 's
 - Grant Terraform Service Principal permission to grant privileges 
 - Push to KeyVailt devops-token | faceitToken
 - Grant Storage Table Data Contributor and Storage Queue Data Contributor for Operator/Owner/Developer to develop from local
+- Terraform Service Principal needs Application Administrator role to be able to create another service principal for smsNotify App
 
 # Azure Function - grap webhooks from Faceit
 Faceit Dev can send webhook data when it's subscribed: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3/webhooks
