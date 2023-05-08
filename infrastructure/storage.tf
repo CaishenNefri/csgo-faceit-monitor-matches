@@ -12,13 +12,6 @@ resource "azurerm_storage_account" "storage" {
   }
 }
 
-resource "azurerm_management_lock" "storage" {
-  name       = "storage-lock"
-  scope      = azurerm_storage_account.storage.id
-  lock_level = "CanNotDelete"
-  notes      = "Locked because it contains every ELO changefor player"
-}
-
 resource "azurerm_storage_table" "players" {
   name                 = "players"
   storage_account_name = azurerm_storage_account.storage.name
