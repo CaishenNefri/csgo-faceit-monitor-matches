@@ -97,7 +97,7 @@
     - Done: Read Azure Communication Services => only available for paied subscriptions
     - Done: Create Queune for pushing notifications
     - Done: Push notification to queue via Powershell/Curl/Python | Works with storage key but not with DefaultAzureCredential because identity didn't have storage account queue contributor
-    - Read queue Python
+    - Done: Read queue Python
     - Activate Sim Card
     - Use USB Modem/Bring other modem
     - Send simple sms via modem
@@ -111,6 +111,9 @@
     - Put Raspberry to the wardrobe
     - How to keep secret in environmet variables as encrypted
     - Create GitHub release for application
+  - Impemented Azure Open AI for SMS Notifications
+    - Read docs about OpenAI on Azure
+    - Greetings base on day, time ("Miłego dnia", miłego wieczoru etc")
   - Set triggers in DevOps pipeline
     - https://pumpingco.de/blog/run-an-azure-pipelines-job-only-if-source-code-has-changed/
     - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops
