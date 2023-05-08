@@ -110,6 +110,7 @@
     - Ansible script to download and use docker image with our app
     - Put Raspberry to the wardrobe
     - How to keep secret in environmet variables as encrypted
+    - Create GitHub release for application
   - Set triggers in DevOps pipeline
     - https://pumpingco.de/blog/run-an-azure-pipelines-job-only-if-source-code-has-changed/
     - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops
@@ -119,6 +120,7 @@
     - condition for Azure Function
     - condition for Azure WebSite
   - Move Python code to container
+  - Create schedulled Azure function to calculate average ELO per year, month, week, day
   - Tweak deploying to use artifacts
   - Use containers to run terraform inside Azure DevOps - in ADO there is not the newest version of terraform
 
