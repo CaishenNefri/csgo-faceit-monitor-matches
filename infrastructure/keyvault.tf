@@ -35,3 +35,9 @@ resource "azurerm_key_vault_secret" "storage_endpoint_table" {
   value        = azurerm_storage_account.storage.primary_table_endpoint
   key_vault_id = azurerm_key_vault.kv.id
 }
+
+resource "azurerm_key_vault_secret" "storage_endpoint_queue" {
+  name         = "STORAGE-ENDPOINT-QUEUE"
+  value        = azurerm_storage_account.storage.primary_queue_endpoint
+  key_vault_id = azurerm_key_vault.kv.id
+}
