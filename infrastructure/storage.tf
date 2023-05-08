@@ -26,3 +26,16 @@ resource "azurerm_storage_queue" "smsNotification" {
   name                 = "smsnotification"
   storage_account_name = azurerm_storage_account.storage.name
 }
+
+
+
+###Test table and queune for local development and debuging
+resource "azurerm_storage_table" "playersTest" {
+  name                 = "playersTest"
+  storage_account_name = azurerm_storage_account.storage.name
+}
+
+resource "azurerm_storage_queue" "smsNotificationtest" {
+  name                 = "smsnotificationtest"
+  storage_account_name = azurerm_storage_account.storage.name
+}
