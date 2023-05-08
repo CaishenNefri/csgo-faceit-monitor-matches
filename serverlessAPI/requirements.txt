@@ -8,3 +8,4 @@ azure-functions
 azure-identity
 azure-data-tables
 azure-storage-blob
+azure-storage-queue

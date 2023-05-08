@@ -96,7 +96,7 @@
   - SMS Notification
     - Done: Read Azure Communication Services => only available for paied subscriptions
     - Done: Create Queune for pushing notifications
-    - Push notification to queue via Powershell/Curl/Python
+    - Done: Push notification to queue via Powershell/Curl/Python | Works with storage key but not with DefaultAzureCredential because identity didn't have storage account queue contributor
     - Read queue Python
     - Activate Sim Card
     - Use USB Modem/Bring other modem
@@ -109,6 +109,7 @@
     - Install Rasperry 
     - Ansible script to download and use docker image with our app
     - Put Raspberry to the wardrobe
+    - How to keep secret in environmet variables as encrypted
   - Set triggers in DevOps pipeline
     - https://pumpingco.de/blog/run-an-azure-pipelines-job-only-if-source-code-has-changed/
     - https://learn.microsoft.com/en-us/azure/devops/pipelines/process/pipeline-triggers?view=azure-devops
@@ -140,7 +141,7 @@ kobze   : '3e2857f6-3a7e-443f-99b7-0bcd1a5114a6',
 hrd     : '30536f2c-ae65-4403-9d3e-64c01724a6ff',
 Daiss   : 'cbd5f9a1-6e80-4122-a222-2ec0c8f06261'
 
-List of watched players is now store in storage account in playersWatched table to be easily managed from one place
+List of watched players is now stored in storage account in playersWatched table to be easily managed from one place
 
 
 
@@ -159,7 +160,8 @@ $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/Caishen"
   - https://github.com/hashicorp/terraform-provider-azurerm/issues/10020
   - Mitigated: by removing all infra and recreate them with depends_on 
 
-# Python APP - website
+# Local Develop/Debug
+## Python APP - website
 To be able to run locally App Service we need to run following commands in sequence
 Install reqiriments:
 `pip install -r requirements.txt`
@@ -173,16 +175,25 @@ $Env:STORAGE_TABLE_PLAYERS = "playersTest"
 Run Python Flask server (debug to restart server on each code change):  
 `flask --app hello.py run --debug`
 
-# Terraform Setup
+## Terraform Setup
 ```Powershell
 $Env:TF_VAR_devops_token = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'devops-token' -AsPlainText
 terraform apply -auto-approve
 ```
 
+## SMS Notify App
+```Powershell
+Connect-AzAccount
+$Env:STORAGE_ENDPOINT_QUEUE = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'STORAGE-ENDPOINT-QUEUE' -AsPlainText
+$Env:SP_OBJECT_ID           = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-object-id' -AsPlainText
+$Env:SP_PW                  = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-pw' -AsPlainText
+```
+
 # Setup
 ## Manual steps
 - Grant Terraform Service Principal permission to grant privileges 
-- Puth to KeyVailt devops-token | faceitToken
+- Push to KeyVailt devops-token | faceitToken
+- Grant Storage Table Data Contributor and Storage Queue Data Contributor for Operator/Owner/Developer to develop from local
 
 # Azure Function - grap webhooks from Faceit
 Faceit Dev can send webhook data when it's subscribed: https://developers.faceit.com/apps/5f1ce3c7-a4f1-4bba-89e2-7851728477d3/webhooks

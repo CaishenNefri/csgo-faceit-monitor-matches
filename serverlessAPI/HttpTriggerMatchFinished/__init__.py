@@ -10,9 +10,15 @@ import azure.functions as func
 
 from azure.identity import DefaultAzureCredential
 from azure.data.tables import TableServiceClient
+from azure.storage.queue import QueueClient
 
 faceitTokenHeader = {"Authorization":f"Bearer {os.environ['FACEIT_TOKEN']}"} #Token to authorize to Faceit API
 playersTable = os.environ["STORAGE_TABLE_PLAYERS"]
+
+smsNotify = [
+    '4ea9d337-ad40-4b55-aab1-0ecf7d5e7dcb', #mejz
+    '993fa04b-8e3b-4964-b9f0-32ca1584e699'  #kapa
+]
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -21,8 +27,15 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # Acquire a credential object to be able to insert to Storage Account
     credential = DefaultAzureCredential()
     table_service_client = TableServiceClient(
-        endpoint=os.environ["STORAGE_ENDPOINT_TABLE"],
-        credential=credential)
+        endpoint    = os.environ["STORAGE_ENDPOINT_TABLE"],
+        credential  = credential
+        )
+
+    queue_service_client = QueueClient(
+        account_url = os.environ["STORAGE_ENDPOINT_QUEUE"],
+        credential  = credential,
+        queue_name  = "smsnotification"
+        )
 
 
     # Log whole webhook payload
@@ -69,6 +82,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     for pWatched in playersPlayedWatched:
         elo = getPlayerElo(pWatched)
         pushToTable(table_service_client, pWatched, timestamp, elo, matchId, playersStats[pWatched])
+        # Iterate throught players for which we send SMS notification if they loose
+        # If loose, send message to queue
+        for notify in smsNotify:
+            if ((pWatched == notify) and (playersStats[pWatched]["ifWin"] == "0")):
+                pushNotifyToQueune(queue_service_client, pWatched)
+                
 
     return func.HttpResponse(
             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
@@ -113,7 +132,6 @@ def getPlayerStatsFromMatch(matchId: str, playersId : list):
     # Request match details for specific player
     response = requests.get(
         f"https://open.faceit.com/data/v4/matches/{matchId}/stats",
-        #TODO Remove token from code
         headers=faceitTokenHeader
         )
 
@@ -169,3 +187,12 @@ def getDictionaryOfWatchedPlayers():
         playersList.append(entity["PartitionKey"]) #Save in proper format to list
  
     return playersList
+
+def pushNotifyToQueune(queue_service_client, playerId):
+    logging.info(f"Push notify to queune")
+    try:
+        response = queue_service_client.send_message(playerId)
+        logging.info(f"Print response form queune {response}")
+    except:
+        logging.info(f"Something goes wrong when pusing notify to queune")
+        #TODO use ErrorName
