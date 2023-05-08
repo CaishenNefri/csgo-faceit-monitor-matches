@@ -1,0 +1,3 @@
+# Used Python SDK
+azure-identity
+azure-storage-queue

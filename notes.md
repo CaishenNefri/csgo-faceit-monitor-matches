@@ -98,6 +98,9 @@
     - Done: Create Queune for pushing notifications
     - Done: Push notification to queue via Powershell/Curl/Python | Works with storage key but not with DefaultAzureCredential because identity didn't have storage account queue contributor
     - Done: Read queue Python
+    - Done: Loop through every message in queue
+    - Done: Compare id to player name
+    - Understand logging inside Python script
     - Activate Sim Card
     - Use USB Modem/Bring other modem
     - Send simple sms via modem
