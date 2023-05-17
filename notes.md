@@ -202,6 +202,7 @@ $Env:AZURE_TENANT_ID        = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 's
 $Env:AZURE_CLIENT_ID        = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-app-id' -AsPlainText
 $Env:AZURE_CLIENT_SECRET    = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'sp-sms-notify-pw' -AsPlainText
 $Env:QUEUE_NAME             = "smsnotificationtest"
+$Env:FILE_SUB_NUMBERS       = "subsNumberTest.json"
 ```
 
 # Setup
