@@ -100,12 +100,14 @@
     - Done: Read queue Python
     - Done: Loop through every message in queue
     - Done: Compare id to player name
-    - Understand logging inside Python script
-    - Activate Sim Card
+    - Done: Activate Sim Card | Play odNowa -> 06.09.2023 pay money
+    - Table with numbers
     - Use USB Modem/Bring other modem
+      - can't use Orange Modem as it has sim-lock | need to go Orange Salon to unlock
+      - https://www.orange.pl/poradnik/smartfony-i-inne-urzadzenia/sim-lock-co-to-takiego/
+      - https://www.orange.pl/omnibook/zdjecie-blokady-sim-lock?f=0&utm_source=301_aff_td&utm_medium=linki_txt&utm_term=3124540&tduid=72880045d63ca84a863a705ba5fcd117&tdaffepi=3124540_mlClick-CMWn51RA_96002&dclid=CIacy7aT6f4CFYfAmgodCyoOqg
     - Send simple sms via modem
     - Send SMS via Python
-    - Table with numbers
     - Table to check who should be "szkalowany"
     - Update Function to send to queue 
     - Create Python App and Docker Container
@@ -113,6 +115,7 @@
     - Ansible script to download and use docker image with our app
     - Put Raspberry to the wardrobe
     - How to keep secret in environmet variables as encrypted
+    - Understand logging inside Python script
     - Create GitHub release for application
   - Impemented Azure Open AI for SMS Notifications
     - Read docs about OpenAI on Azure
@@ -180,6 +183,7 @@ Connect-AzAccount
 $Env:STORAGE_ENDPOINT_TABLE = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'STORAGE-ENDPOINT-TABLE' -AsPlainText
 $Env:FACEIT_TOKEN           = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'faceitToken' -AsPlainText
 $Env:STORAGE_TABLE_PLAYERS = "playersTest"
+$Env:QUEUE_NAME             = "smsnotificationtest"
 ```
 Run Python Flask server (debug to restart server on each code change):  
 `flask --app hello.py run --debug`

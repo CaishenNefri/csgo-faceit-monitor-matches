@@ -6,6 +6,7 @@ import json
 
 import requests
 
+import azure.core.exceptions as exceptions
 import azure.functions as func
 
 from azure.identity import DefaultAzureCredential
@@ -34,8 +35,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     queue_service_client = QueueClient(
         account_url = os.environ["STORAGE_ENDPOINT_QUEUE"],
         credential  = credential,
-        queue_name  = "smsnotification"
-        )
+        queue_name  = os.environ["QUEUE_NAME"]
+        ) 
 
 
     # Log whole webhook payload
@@ -81,12 +82,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     for pWatched in playersPlayedWatched:
         elo = getPlayerElo(pWatched)
-        pushToTable(table_service_client, pWatched, timestamp, elo, matchId, playersStats[pWatched])
-        # Iterate throught players for which we send SMS notification if they loose
-        # If loose, send message to queue
-        for notify in smsNotify:
-            if ((pWatched == notify) and (playersStats[pWatched]["ifWin"] == "0")):
-                pushNotifyToQueune(queue_service_client, pWatched)
+        respone = pushToTable(table_service_client, pWatched, timestamp, elo, matchId, playersStats[pWatched])
+        if(respone):
+            # Iterate throught players for which we send SMS notification if they loose
+            # If loose, send message to queue
+            for notify in smsNotify:
+                if ((pWatched == notify) and (playersStats[pWatched]["ifWin"] == "0")):
+                    pushNotifyToQueune(queue_service_client, pWatched)
                 
 
     return func.HttpResponse(
@@ -115,9 +117,14 @@ def pushToTable(table_service_client, playerId, timestamp, elo, matchId, stats):
     try:
         response = table_client.create_entity(entity=entity)
         logging.info(f"Print response {response}")
+        return True
+    except exceptions.ResourceExistsError:
+        logging.info(f"Except ResourceExistsError with response")
+        return False
     except:
-        logging.info(f"Something goes wrong. Propably entity already exist")
+        logging.info(f"Something other goes wrong when pushing to table.")
         #TODO use ErrorName
+        return False
 
 def getPlayerElo(playerId):
     response = requests.get(
