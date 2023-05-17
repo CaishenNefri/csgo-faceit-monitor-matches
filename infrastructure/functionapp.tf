@@ -24,7 +24,8 @@ resource "azurerm_linux_function_app" "functionapp" {
     STORAGE_ENDPOINT_QUEUE          = azurerm_storage_account.storage.primary_queue_endpoint
     WEBSITE_ENABLE_SYNC_UPDATE_SITE = false
     FACEIT_TOKEN                    = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault.kv.vault_uri}secrets/faceitToken/)"
-    STORAGE_TABLE_PLAYERS           = "players"
+    STORAGE_TABLE_PLAYERS           = azurerm_storage_table.players.name
+    QUEUE_NAME                      = azurerm_storage_queue.smsNotification.name
   }
 
   identity {
