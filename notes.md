@@ -195,6 +195,7 @@ terraform apply -auto-approve
 ```
 
 ## SMS Notify App
+### Script
 ```Powershell
 Connect-AzAccount
 $Env:STORAGE_ENDPOINT_QUEUE = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 'STORAGE-ENDPOINT-QUEUE' -AsPlainText
@@ -204,6 +205,10 @@ $Env:AZURE_CLIENT_SECRET    = Get-AzKeyVaultSecret -VaultName 'kv69415' -Name 's
 $Env:QUEUE_NAME             = "smsnotificationtest"
 $Env:FILE_SUB_NUMBERS       = "subsNumberTest.json"
 ```
+
+### Raspberry configuration
+- Setup Raspberry image via Respberry Pi Imager
+- 
 
 # Setup
 ## Manual steps
