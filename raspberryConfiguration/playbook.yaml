@@ -4,27 +4,18 @@
   become: true
   gather_facts: False #To disable first task
   tasks:
-    - name: Add apt repository
-      ansible.builtin.apt_repository:
-        repo: universe
-        state: present
-    - name: Update apt
-      ansible.builtin.apt:
-        update_cache: true
     - name: Install PIP3
       ansible.builtin.apt:
-        name: python3-pip=20.3.4
+        name: python3-pip
         state: present
     - name: Install GIT
       ansible.builtin.apt:
-        name: git=2.30.2
+        name: git
         state: present
-        update_cache: true
     - name: Install Android Debug Bridge (ADB)
       ansible.builtin.apt:
-        name: android-sdk-platform-tools=1.0.41
+        name: android-sdk-platform-tools
         state: present
-        update_cache: true
     - name: Clone single branch from repo
       ansible.builtin.git:
         repo: https://github.com/CaishenNefri/csgo-faceit-monitor-matches.git
