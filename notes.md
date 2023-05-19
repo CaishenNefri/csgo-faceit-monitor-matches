@@ -101,22 +101,20 @@
     - Done: Loop through every message in queue
     - Done: Compare id to player name
     - Done: Activate Sim Card | Play odNowa -> 06.09.2023 pay money
-    - Table with numbers
-    - Use USB Modem/Bring other modem
-      - can't use Orange Modem as it has sim-lock | need to go Orange Salon to unlock
-      - https://www.orange.pl/poradnik/smartfony-i-inne-urzadzenia/sim-lock-co-to-takiego/
-      - https://www.orange.pl/omnibook/zdjecie-blokady-sim-lock?f=0&utm_source=301_aff_td&utm_medium=linki_txt&utm_term=3124540&tduid=72880045d63ca84a863a705ba5fcd117&tdaffepi=3124540_mlClick-CMWn51RA_96002&dclid=CIacy7aT6f4CFYfAmgodCyoOqg
-    - Send simple sms via modem
-    - Send SMS via Python
-    - Table to check who should be "szkalowany"
-    - Update Function to send to queue 
-    - Create Python App and Docker Container
-    - Install Rasperry 
-    - Ansible script to download and use docker image with our app
-    - Put Raspberry to the wardrobe
+    - Done: Understand logging inside Python script
+    - Done: Update Function to send to queue 
+    - Done: Table to check who should be "szkalowany" -> hard coded at this point
+    - Done: Install Raspberry 
+    - Ansible install Git
+    - Ansible install Python requriments
+    - Ansible setup CRON JOB
+    - Ansible install ADB
+    - Ansible setup env variables
+    - Ansible download json file from SA with numbers
+    - Table->Json file with numbers in storage account
     - How to keep secret in environmet variables as encrypted
-    - Understand logging inside Python script
     - Create GitHub release for application
+    - Move application to Docker??
   - Impemented Azure Open AI for SMS Notifications
     - Read docs about OpenAI on Azure
     - Greetings base on day, time ("Miłego dnia", miłego wieczoru etc")
@@ -207,8 +205,11 @@ $Env:FILE_SUB_NUMBERS       = "subsNumberTest.json"
 ```
 
 ### Raspberry configuration
-- Setup Raspberry image via Respberry Pi Imager
-- 
+- Setup Raspberry image via Respberry Pi Imager with ssh key
+  - password from Zabbix node
+  - ssh key from WSL from Ubuntu1 - Caishen
+- Ansible run playbook: `ansible-playbook -K playbook.yaml`
+  - `-K` for getting password to sudo
 
 # Setup
 ## Manual steps

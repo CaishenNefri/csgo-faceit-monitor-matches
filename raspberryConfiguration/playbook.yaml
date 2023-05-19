@@ -1,0 +1,25 @@
+- name: My first play
+  hosts: faceit.local
+  remote_user: pi
+  become: true
+  gather_facts: False #To disable first task
+  tasks:
+    - name: Install GIT
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+    - name: Install Android Debug Bridge (ADB)
+      apt:
+        name: android-sdk-platform-tools
+        state: present
+        update_cache: yes
+    - name: Clone single branch from repo
+      ansible.builtin.git:
+        repo: https://github.com/CaishenNefri/csgo-faceit-monitor-matches.git
+        dest: /home/smsNotify
+        single_branch: yes
+        version: feature/smsNotification
+    - name: Install smsNotify app requriments
+      ansible.buildin.pip:
+        requirements: /home/smNotify/smsNotifyApplication/requirements.txt
