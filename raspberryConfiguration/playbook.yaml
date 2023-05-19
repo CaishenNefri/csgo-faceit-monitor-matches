@@ -4,6 +4,11 @@
   become: true
   gather_facts: False #To disable first task
   tasks:
+    - name: Install PIP3
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
     - name: Install GIT
       apt:
         name: git
@@ -20,6 +25,10 @@
         dest: /home/smsNotify
         single_branch: yes
         version: feature/smsNotification
+    - name: Execute permission for smsApp - python requriments
+      file: dest=/home/smNotify/smsNotifyApplication/requirements.txt mode=a+x
+    - name: Execute permission for smsApp - python main.py
+      file: dest=/home/smNotify/smsNotifyApplication/main.py mode=a+x
     - name: Install smsNotify app requriments
-      ansible.buildin.pip:
+      ansible.builtin.pip:
         requirements: /home/smNotify/smsNotifyApplication/requirements.txt
