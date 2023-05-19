@@ -4,31 +4,37 @@
   become: true
   gather_facts: False #To disable first task
   tasks:
+    - name: Add apt repository
+      ansible.builtin.apt_repository:
+        repo: universe
+        state: present
+    - name: Update apt
+      ansible.builtin.apt:
+        update_cache: true
     - name: Install PIP3
-      apt:
-        name: python3-pip
+      ansible.builtin.apt:
+        name: python3-pip=20.3.4
         state: present
-        update_cache: yes
     - name: Install GIT
-      apt:
-        name: git
+      ansible.builtin.apt:
+        name: git=2.30.2
         state: present
-        update_cache: yes
+        update_cache: true
     - name: Install Android Debug Bridge (ADB)
-      apt:
-        name: android-sdk-platform-tools
+      ansible.builtin.apt:
+        name: android-sdk-platform-tools=1.0.41
         state: present
-        update_cache: yes
+        update_cache: true
     - name: Clone single branch from repo
       ansible.builtin.git:
         repo: https://github.com/CaishenNefri/csgo-faceit-monitor-matches.git
         dest: /home/smsNotify
-        single_branch: yes
+        single_branch: true
         version: feature/smsNotification
     - name: Execute permission for smsApp - python requriments
-      file: dest=/home/smNotify/smsNotifyApplication/requirements.txt mode=a+x
+      file: dest=/home/smsNotify/smsNotifyApplication/requirements.txt mode=a+x
     - name: Execute permission for smsApp - python main.py
-      file: dest=/home/smNotify/smsNotifyApplication/main.py mode=a+x
+      file: dest=/home/smsNotify/smsNotifyApplication/main.py mode=a+x
     - name: Install smsNotify app requriments
       ansible.builtin.pip:
-        requirements: /home/smNotify/smsNotifyApplication/requirements.txt
+        requirements: /home/smsNotify/smsNotifyApplication/requirements.txt
