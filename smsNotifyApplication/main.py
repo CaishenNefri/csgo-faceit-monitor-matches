@@ -6,8 +6,10 @@ import json
 from azure.identity import DefaultAzureCredential
 from azure.storage.queue import QueueClient
 
+scriptDir = os.path.dirname(__file__)
+
 def main():
-    logging.basicConfig(filename="logs.log", level=logging.INFO)
+    logging.basicConfig(filename=os.path.join(scriptDir,"logs.log"), level=logging.INFO)
     logging.info('SMS App triggered')
 
     logging.info("Get Subscriber's Numbers")
@@ -35,7 +37,7 @@ def main():
             nick = getPlayerNick(msg.content)
             if (nick):
                 for sub in subscribers["Contacts"]:
-                    sms = f'{nick}\ znów\ przegrał\ faceita\ Miłego\ dnia\ {sub["Nick"]}'
+                    sms = f'{nick}\ znów\ przegrał\ faceita\ Miłego\ dnia\ {sub["Nick"]}\ Defacto'
                     sendSMS(sub["Number"], sms)
             
         
@@ -63,8 +65,10 @@ def getPlayerNick(playerId):
         return False
     
 def getRecipients():
+    subsNumber = os.environ["FILE_SUB_NUMBERS"]
+    absFilePath = os.path.join(scriptDir, subsNumber)
     # Opening JSON file
-    f = open(os.environ["FILE_SUB_NUMBERS"])
+    f = open(absFilePath)
     
     # returns JSON object as a dictionary
     data = json.load(f)
